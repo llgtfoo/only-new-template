@@ -1,26 +1,24 @@
-// import ViewUI from 'view-design'
-// import 'view-design/dist/styles/iview.css'
-// Vue.use(ViewUI)
 import '@/assets/css/init.css' //默认css
 import '@/assets/css/scroll.scss' //默认css
 import '@/lib/http/axios' //axios
 import { http } from '@/lib/http/index' //封装后的axios
 import echarts from 'echarts'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/index.css' //ui框架
 import Vue from 'vue'
 // 设置cookie
 import VueCookies from 'vue-cookies'
-//ui框架
 import Fragment from 'vue-fragment'
 import { sync } from 'vuex-router-sync'
 import App from './App.vue'
 import components from './components/index'
 import directives from './directives/index'
+// import './permission'
 import router from './router'
 import store from './store'
 import utils from './utils/index'
 import views from './views/index'
+
 Vue.use(ElementUI)
 Vue.use(VueCookies)
 

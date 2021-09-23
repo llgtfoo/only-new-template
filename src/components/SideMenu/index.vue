@@ -1,14 +1,208 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+    <el-container style="height: 100%">
+        <el-aside :style="{ width: `${!isCollapse ? '250px' : '65px'}` }">
+            <el-menu
+                :default-active="activeIndex"
+                class="el-menu-vertical"
+                :collapse="isCollapse"
+                :unique-opened="true"
+                :router="true"
+                :default-openeds="defaultOpeneds"
+                @select="selectMenu"
+            >
+                <template v-for="item in menus">
+                    <template
+                        v-if="item && item.children && item.children.length > 0"
+                    >
+                        <sub-menu :menuInfo="item" :key="item.cnameKey" />
+                    </template>
+                    <template v-else>
+                        <el-menu-item
+                            :index="item.normalUrl"
+                            :key="item.normalUrl"
+                        >
+                            <i class="icon iconfont" :class="item.icon"></i>
+                            <span slot="title" style="marginleft: 5px">
+                                {{ item.cname }}
+                            </span>
+                        </el-menu-item>
+                    </template>
+                </template>
+            </el-menu>
+            <div
+                class="isCollapse"
+                @click="isCollapse = !isCollapse"
+                :style="`width:${!isCollapse ? '250px' : '65px'}`"
+            >
+                <span
+                    class="icon iconfont"
+                    :class="{
+                        'icon-arrow-left': !isCollapse,
+                        'icon-arrow-right': isCollapse,
+                    }"
+                ></span>
+            </div>
+        </el-aside>
+        <el-container
+            :style="{
+                width: `${
+                    isCollapse ? 'calc(100% - 250px)' : 'calc(100% - 65px)'
+                }`,
+                display: 'flex',
+                'flex-direction': 'column',
+            }"
+        >
+            <div class="breadcrumb">
+                <el-tabs v-model="activeName" @tab-click="handleClick" closable>
+                    <el-tab-pane label="用户管理" name="first"> </el-tab-pane>
+                    <el-tab-pane label="配置管理" name="second"> </el-tab-pane>
+                    <el-tab-pane label="角色管理" name="third"> </el-tab-pane>
+                </el-tabs>
+                <div class="breadcrumb-tool">
+                    <el-dropdown @command="handleCommand">
+                        <i class="el-icon-arrow-down"></i>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item> 关闭全部 </el-dropdown-item>
+                            <el-dropdown-item> 刷新当前页 </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+            </div>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
+        </el-container>
+    </el-container>
 </template>
 
 <script>
+//菜单无限循环生成
+const SubMenu = {
+    template: `
+    <el-submenu :index="menuInfo.normalUrl" v-bind="$props" v-on="$listeners">
+     <template slot='title'>
+        <i class="icon iconfont" :class="menuInfo.icon"></i>
+        <span slot="title">{{menuInfo.cname }}</span>
+      </template>
+     <template v-for="v in menuInfo.children">
+        <template v-if="v && v.children && v.children.length > 0">
+          <sub-menu :menu-info="v" :key="v.normalUrl" />
+        </template>
+        <template v-else>
+         <el-menu-item :index="v.normalUrl">
+            <i class="icon iconfont" :class="v.icon"></i>
+            <span slot="title">{{v.cname}}</span>
+          </el-menu-item>
+        </template>
+    </template>
+    </el-submenu>`,
+    name: 'SubMenu',
+    props: {
+        menuInfo: {
+            type: Object,
+            default: () => ({}),
+        },
+    },
+}
 export default {
-  name: 'SideMenu',
+    name: 'SideMenu',
+    components: { SubMenu },
+    data() {
+        return {
+            activeName: 'first',
+            isCollapse: false,
+            activeIndex: '', //选中菜单项
+            defaultOpeneds: [], //默认打开
+        }
+    },
+    computed: {
+        //获取二级菜单
+        menus() {
+            return this.$store.getters['common/user/getCurrentMenu'] && this.$store.getters['common/user/getCurrentMenu'][
+                'children'
+            ]
+        },
+    },
+    watch: {
+        $route: {
+            handler(route) {
+                this.activeIndex = route.fullPath
+            },
+            deep: true,
+            immediate: true,
+        },
+    },
+    mounted() {
+        this.activeIndex = this.$route.fullPath
+    },
+    methods: {
+        //选中菜单
+        selectMenu(index, path) {
+            console.log(index, path)
+        },
+        handleClick() {},
+    },
 }
 </script>
 
 <style lang="scss" scoped>
+.el-menu-vertical {
+    height: calc(100% - 60px);
+    /deep/.el-menu-item.is-active {
+        background-color: #ecf5ff;
+    }
+}
+/deep/.el-tabs__header {
+    margin: 0;
+}
+/deep/.el-tabs__nav-scroll {
+    padding: 0 10px;
+}
+/deep/.el-tabs__nav-next,
+/deep/.el-tabs__nav-prev {
+    line-height: 40px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    justify-content: center;
+    background: #f8f9fa;
+}
+.breadcrumb {
+    width: 100%;
+    display: flex;
+    /deep/.el-tabs--top {
+        width: calc(100% - 50px);
+        background: #fff;
+    }
+
+    .breadcrumb-tool {
+        width: 50px;
+        height: 100%;
+        background: #e9eaeb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+/deep/.iconfont {
+    margin-right: 5px;
+    width: 24px;
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.isCollapse {
+    height: 60px;
+    background: rgb(64, 158, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .iconfont {
+        font-size: 30px;
+        color: #fff;
+    }
+}
 </style>
