@@ -10,5 +10,8 @@ export default () => ({
     children: [{
         path: '/module1/menu2/moduleMenu1',
         component: moduleMenu,
-    }]
+        meta: {
+            title: '菜单二',
+        },
+    }],
 })

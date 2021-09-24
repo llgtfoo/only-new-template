@@ -54,9 +54,13 @@
         >
             <div class="breadcrumb">
                 <el-tabs v-model="activeName" @tab-click="handleClick" closable>
-                    <el-tab-pane label="用户管理" name="first"> </el-tab-pane>
-                    <el-tab-pane label="配置管理" name="second"> </el-tab-pane>
-                    <el-tab-pane label="角色管理" name="third"> </el-tab-pane>
+                    <el-tab-pane
+                        :label="item.name"
+                        :name="item.path"
+                        v-for="item in tabList"
+                        :key="item.path"
+                    >
+                    </el-tab-pane>
                 </el-tabs>
                 <div class="breadcrumb-tool">
                     <el-dropdown @command="handleCommand">
@@ -109,10 +113,11 @@ export default {
     components: { SubMenu },
     data() {
         return {
-            activeName: 'first',
+            activeName: '',
             isCollapse: false,
             activeIndex: '', //选中菜单项
             defaultOpeneds: [], //默认打开
+            tabList: [], //打开的菜单集合
         }
     },
     computed: {
@@ -126,7 +131,18 @@ export default {
     watch: {
         $route: {
             handler(route) {
-                this.activeIndex = route.fullPath
+                if (route) {
+                    this.activeIndex = route.fullPath
+                    if (this.tabList.findIndex(item => item.path === route.fullPath) === -1) {
+                        if (route.meta.title) {
+                            this.tabList.push({
+                                name: route.meta.title,
+                                path: route.fullPath,
+                            })
+                        }
+                    }
+                    this.activeName = route.fullPath
+                }
             },
             deep: true,
             immediate: true,
@@ -140,7 +156,12 @@ export default {
         selectMenu(index, path) {
             console.log(index, path)
         },
-        handleClick() {},
+        //tab点击
+        handleClick(tab) {
+            this.$router.push(tab.name)
+        },
+        //工具栏
+        handleCommand() {},
     },
 }
 </script>
@@ -172,17 +193,18 @@ export default {
     width: 100%;
     display: flex;
     /deep/.el-tabs--top {
-        width: calc(100% - 50px);
+        width: calc(100% - 40px);
         background: #fff;
     }
 
     .breadcrumb-tool {
-        width: 50px;
+        width: 40px;
         height: 100%;
         background: #e9eaeb;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
     }
 }
 /deep/.iconfont {

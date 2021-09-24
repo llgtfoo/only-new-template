@@ -13,5 +13,5 @@ export default () => ({
         meta: {
             title: '菜单一',
         },
-    }, ],
+    }],
 })
