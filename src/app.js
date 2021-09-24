@@ -4,7 +4,8 @@ import '@/lib/http/axios' //axios
 import { http } from '@/lib/http/index' //封装后的axios
 import echarts from 'echarts'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css' //ui框架
+import 'element-ui/lib/theme-chalk/index.css'
+//ui框架
 import Vue from 'vue'
 // 设置cookie
 import VueCookies from 'vue-cookies'

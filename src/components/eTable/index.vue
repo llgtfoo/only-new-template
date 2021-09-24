@@ -58,9 +58,11 @@
         </el-table>
         <el-pagination
             v-if="pagination"
+            class="pagination-define"
             @size-change="sizeChangeHandle"
             @current-change="currentChangeHandle"
             :current-page="currentPage"
+            :page-sizes="pageSizeArray"
             background
             prev-text="上一页"
             next-text="下一页"
@@ -71,112 +73,126 @@
         </el-pagination>
     </div>
 </template>
- <!-- <template slot-scope="{data}" slot="operation">
-          <el-button
-            @click="handleClick(data.row)"
-            type="text"
-            size="small"
-            >查看</el-button
-          >
-          <el-button type="text" size="small"
-            >编辑</el-button
-          >
-        </template>
-        <template slot-scope="scope" slot="name1">
-          <span>{{ scope.data.row.name }}</span>
-        </template> -->
+ <!--  -->
 <script>
 export default {
+    name: 'ETable',
     props: {
+        //页条数
+        pageSizeArray: {
+            type: Array,
+            default: () => ([10, 20, 30, 40]),
+        },
+        //Table 目前的展开行
         expandRows: {
             type: Array,
         },
+        //绑定的行数据的 Key
         rowKey: {
             type: String,
         },
+        //表格高度
         height: {
             type: [Number, String],
         },
+        //显示分页
         pagination: {
             type: Boolean,
             default: true,
         },
+        //分页功能排序
         layout: {
             type: String,
-            default: 'prev, pager, next, total ,jumper',
+            default: 'total, sizes, prev, pager, next, jumper',
         },
+        //表格最大高度
         maxHeight: {
             type: [Number, String],
         },
+        //当前页
         currentPage: {
             type: [Number, String],
             default: 1,
         },
+        //页条数
         pageSize: {
             type: [Number, String],
             default: 10,
         },
+        //总条数
         totalPage: {
             type: [Number, String],
             default: 0,
         },
+        //表头行的 style 的回调方法
         headerRowStyle: {
             type: Object,
             default: () => ({}),
-        }, // 表头行的 style
+        },
+        // 表头单元格的 style
         headerCellStyle: {
             type: Object,
             default: () => ({
-                padding: 0,
+                // padding: 0,
                 'background-color': '#F5F6FA',
             }),
-        }, // 表头单元格的 style
+        },
+        //行的 style 的回调方法
         rowStyle: {
             type: Object,
             default: () => ({
-                height: '30px',
-                'line-height': '30px',
+                height: '50px',
+                'line-height': '50px',
             }),
-        }, // 行的 style
+        },
+        // 单元格的 style
         cellStyle: {
             type: Object,
             default: () => ({
                 padding: 0,
             }),
-        }, // 单元格的 style
+        },
+        //是否要高亮当前行
         highlightCurrentRow: {
             type: Boolean,
-            default: true,
-        }, // 是否要高亮当前行
+            default: false,
+        },
+        // 是否为斑马纹 table
         stripe: {
             type: Boolean,
             default: true,
-        }, // 是否为斑马纹 table
+        },
+        // 是否带有纵向边框
         border: {
             type: Boolean,
             default: false,
-        }, // 是否带有纵向边框
+        },
+        // loading
         isloading: {
             type: Boolean,
             default: false,
-        }, // loading
+        },
+        //数据
         data: {
             type: Array,
             default: () => [],
-        }, // 数据
+        },
+        // 列表项
         columns: {
             type: Array,
             default: () => [],
-        }, // 列表项
+        },
     },
     data() {
         return {}
     },
     mounted() { },
     methods: {
+        //页条数
         sizeChangeHandle(number) {
             this.$emit('size-change', number)
         },
+        //页码
         currentChangeHandle(page) {
             this.$emit('current-change', page)
         },
@@ -185,9 +201,8 @@ export default {
         tableRef() {
             return this.$refs.elTable
         },
-        // 默认选中想
+        // 默认选中项
         toggleSelection(rows) {
-            console.log(rows, 'rows')
             if (rows) {
                 rows.forEach((row) => {
                     this.$refs.elTable.toggleRowSelection(row)
@@ -212,11 +227,13 @@ export default {
         cellClick(row, column, cell, event) {
             this.$emit('cell-click', { row, column, cell, event })
         },
-        handleClick(row) {
-            console.log(row)
-        },
     },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.pagination-define {
+    text-align: center;
+    margin-top: 10px;
+}
+</style>

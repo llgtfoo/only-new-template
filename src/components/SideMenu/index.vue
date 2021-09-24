@@ -1,5 +1,12 @@
 <template>
-    <el-container style="height: 100%">
+    <el-container
+        style="height: 100%"
+        v-water-marker="{
+            width: '300px',
+            height: '150px',
+            content: '系统名称',
+        }"
+    >
         <el-aside :style="{ width: `${!isCollapse ? '250px' : '65px'}` }">
             <el-menu
                 :default-active="activeIndex"
@@ -53,7 +60,12 @@
             }"
         >
             <div class="breadcrumb">
-                <el-tabs v-model="activeName" @tab-click="handleClick" closable>
+                <el-tabs
+                    v-model="activeName"
+                    @tab-click="handleClick"
+                    @tab-remove="removeTab"
+                    :closable="closable"
+                >
                     <el-tab-pane
                         :label="item.name"
                         :name="item.path"
@@ -64,16 +76,23 @@
                 </el-tabs>
                 <div class="breadcrumb-tool">
                     <el-dropdown @command="handleCommand">
-                        <i class="el-icon-arrow-down"></i>
+                        <i
+                            class="el-icon-arrow-down"
+                            style="fontsize: 18px"
+                        ></i>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item> 关闭全部 </el-dropdown-item>
-                            <el-dropdown-item> 刷新当前页 </el-dropdown-item>
+                            <el-dropdown-item command="all">
+                                关闭全部
+                            </el-dropdown-item>
+                            <el-dropdown-item command="refresh">
+                                刷新当前页
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
             </div>
             <el-main>
-                <router-view></router-view>
+                <router-view v-if="isRouterActive"></router-view>
             </el-main>
         </el-container>
     </el-container>
@@ -118,6 +137,8 @@ export default {
             activeIndex: '', //选中菜单项
             defaultOpeneds: [], //默认打开
             tabList: [], //打开的菜单集合
+            isRouterActive: true,
+            closable: true,
         }
     },
     computed: {
@@ -147,6 +168,18 @@ export default {
             deep: true,
             immediate: true,
         },
+        //监听tab标签页长度
+        tabList: {
+            handler(newVal) {
+                if (newVal.length === 1) {
+                    this.closable = false
+                } else {
+                    this.closable = true
+                }
+            },
+            deep: true,
+            immediate: true,
+        },
     },
     mounted() {
         this.activeIndex = this.$route.fullPath
@@ -160,8 +193,32 @@ export default {
         handleClick(tab) {
             this.$router.push(tab.name)
         },
+        //tab关闭
+        removeTab(tab) {
+            const index = this.tabList.findIndex(v => v.path === tab)
+            if (index !== -1) {
+                this.tabList.splice(index, 1)
+            }
+            if (tab === this.$route.fullPath) {
+                this.$router.push(this.tabList[this.tabList.length - 1].path)
+            }
+        },
         //工具栏
-        handleCommand() {},
+        handleCommand(item) {
+            if (item === 'refresh') {
+                this.isRouterActive = false
+                this.$nextTick(function () {
+                    this.isRouterActive = true
+                })
+            } else if (item === 'all') {
+                this.tabList = []
+                this.tabList.push({
+                    name: this.$route.meta.title,
+                    path: this.$route.fullPath,
+                })
+                this.activeName = this.$route.fullPath
+            }
+        },
     },
 }
 </script>
@@ -188,6 +245,9 @@ export default {
     height: 40px;
     justify-content: center;
     background: #f8f9fa;
+}
+/deep/.el-dropdown {
+    font-size: 20px;
 }
 .breadcrumb {
     width: 100%;

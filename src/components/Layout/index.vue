@@ -93,6 +93,7 @@ export default {
         handleCommand(command) {
             console.log(command)
         },
+
     },
 }
 </script>
