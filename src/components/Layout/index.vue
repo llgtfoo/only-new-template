@@ -43,6 +43,9 @@
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
+                <div class="theme-picker">
+                    <theme-picker></theme-picker>
+                </div>
             </div>
         </el-header>
         <div style="height: calc(100% - 60px)">
@@ -118,10 +121,29 @@ export default {
     color: #fff;
     font-size: 25px;
 }
+.el-header {
+    /deep/.el-menu--horizontal,
+    /deep/.el-menu-item {
+        background: #409eff !important;
+    }
+}
+
 .el-menu--horizontal > .el-menu-item.is-active {
     border-bottom: 2px solid transparent !important;
-    background: #027ffb !important;
+
     font-size: 16px;
+    font-weight: bolder;
+    position: relative;
+    &:after {
+        content: "";
+        width: 80%;
+        height: 3px;
+        background: #fff;
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 .iconfont {
     margin-right: 5px;
@@ -133,5 +155,8 @@ export default {
     align-items: center;
     justify-content: center;
     background: #409eff;
+    .theme-picker {
+        margin-left: 10px;
+    }
 }
 </style>
