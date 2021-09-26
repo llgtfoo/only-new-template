@@ -1,9 +1,17 @@
+<!--
+ * @Description: '系统主题在线切换'
+ * @Author: llgtfoo
+ * @Date: 2021-09-26 10:10:01
+ * @Last Modified by:   llgtfoo
+ * @Last Modified time: 2021-09-26 10:10:01
+ -->
 <template>
     <el-tooltip effect="dark" content="theme" placement="bottom">
         <el-color-picker
             v-model="theme"
             class="theme-picker"
             size="small"
+            @change="changeColor"
             popper-class="theme-picker-dropdown"
         />
     </el-tooltip>
@@ -23,16 +31,17 @@ export default {
         }
     },
     computed: {
-        theme1() {
-            return '#FF40F5'
+        userTheme() {
+            return this.$store.getters['common/user/userTheme']
         },
     },
+
     watch: {
         theme(val, oldVal) {
             if (typeof val !== 'string') { return }
             const themeCluster = this.getThemeCluster(val.replace('#', ''))
             const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
-            console.log(themeCluster, originalCluster)
+            // console.log(themeCluster, originalCluster)
             const getHandler = (variable, id) => {
                 return () => {
                     const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
@@ -67,13 +76,19 @@ export default {
                 if (typeof innerText !== 'string') { return }
                 style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
             })
+        },
+    },
+    mounted() {
+        this.theme = this.userTheme
+    },
+    methods: {
+        changeColor(color) {
+            this.$store.dispatch('common/user/doUserTheme', color)
             this.$message({
                 message: '换肤成功',
                 type: 'success',
             })
         },
-    },
-    methods: {
         updateStyle(style, oldCluster, newCluster) {
             let newStyle = style
             oldCluster.forEach((color, index) => {

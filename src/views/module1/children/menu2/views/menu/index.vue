@@ -76,7 +76,7 @@
             <el-link type="danger">危险链接</el-link>
             <el-link type="info">信息链接</el-link>
             <el-progress :percentage="50"></el-progress>
-            <el-progress :percentage="100" :format="format"></el-progress>
+            <el-progress :percentage="100"></el-progress>
             <el-progress :percentage="100" status="success"></el-progress>
             <el-progress :percentage="100" status="warning"></el-progress>
             <el-progress :percentage="50" status="exception"></el-progress>
