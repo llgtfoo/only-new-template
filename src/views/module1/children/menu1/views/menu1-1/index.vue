@@ -21,7 +21,7 @@
             <el-button type="text" size="small"> 编辑 </el-button>
         </template>
         <template slot-scope="scope" slot="name1">
-            <el-tag type="success">{{ scope.data.row.name }}</el-tag>
+            <el-tag type="success">{{scope.data.row.name}}</el-tag>
         </template>
     </e-table>
 </template>
@@ -32,43 +32,51 @@ export default {
     data() {
         return {
             isloading: false,
-            data: [{
-                date: '2016-05-03',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }, {
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }, {
-                date: '2016-05-08',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }, {
-                date: '2016-05-06',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }, {
-                date: '2016-05-07',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-            }],
+            data: [
+                {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+                {
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+                {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+                {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+                {
+                    date: '2016-05-08',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+                {
+                    date: '2016-05-06',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+                {
+                    date: '2016-05-07',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                },
+            ],
             stockColumn,
             currentPage: 10,
             pageSize: 10,
             totalPage: 100,
         }
     },
-    mounted() {
-    },
+    mounted() {},
+
     methods: {
         //点击行
         cellClick({ row, column, event }) {

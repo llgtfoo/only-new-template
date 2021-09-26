@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /**
  * @name: 二次封装post和get方法，统一传参方式{}
  * @param {type}
@@ -8,16 +9,16 @@ const http = {
                 method: 'post',
                 url: url,
                 data,
-                ...(arguments[2]),
+                ...arguments[2],
             }
             return await axios(optipns)
         },
-        asyncget(url, data) {
+        async get(url, data) {
             const optipns = {
                 method: 'get',
                 url: url,
                 params: data,
-                ...(arguments[2]),
+                ...arguments[2],
             }
             return await axios(optipns)
         },

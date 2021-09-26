@@ -15,12 +15,12 @@ export default (Vue, router, store) => {
                 path: '/login',
                 name: 'login',
                 component: () =>
-                    import ('./login/index.vue'),
+                    import('./login/index.vue'),
             },
             {
                 path: '/404', // 此处需特别注意至于最底部
                 component: () =>
-                    import ('../components/NotFound'),
+                    import('../components/NotFound'),
             },
             {
                 path: '*',
