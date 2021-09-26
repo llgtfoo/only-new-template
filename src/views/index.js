@@ -9,7 +9,7 @@ export default (Vue, router, store) => {
         [{
                 path: '/',
                 name: 'root',
-                redirect: '/home',
+                redirect: '/login',
             },
             {
                 path: '/login',

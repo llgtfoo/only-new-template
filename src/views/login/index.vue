@@ -120,7 +120,7 @@ export default {
         submitForm() {
             this.$refs.ruleForm.validate((valid) => {
                 if (valid) {
-                    alert('submit!')
+                    this.$router.push('/home')
                 } else {
                     console.log('error submit!!')
                     return false

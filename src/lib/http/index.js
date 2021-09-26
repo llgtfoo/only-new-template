@@ -3,28 +3,28 @@
  * @param {type}
  */
 const http = {
-  async post(url, data) {
-    const optipns = {
-      method: 'post',
-      url: url,
-      data,
-      ...(arguments[2]),
+        async post(url, data) {
+            const optipns = {
+                method: 'post',
+                url: url,
+                data,
+                ...(arguments[2]),
+            }
+            return await axios(optipns)
+        },
+        asyncget(url, data) {
+            const optipns = {
+                method: 'get',
+                url: url,
+                params: data,
+                ...(arguments[2]),
+            }
+            return await axios(optipns)
+        },
     }
-    return await axios(optipns)
-  },
-  async get(url, data) {
-    const optipns = {
-      method: 'get',
-      url: url,
-      params: data,
-      ...(arguments[2]),
-    }
-    return await axios(optipns)
-  },
-}
-// export default {
-//   install: function (Vue) {
-//     Vue.prototype.http = _axios_
-//   },
-// }
+    // export default {
+    //   install: function (Vue) {
+    //     Vue.prototype.http = _axios_
+    //   },
+    // }
 export { http }
