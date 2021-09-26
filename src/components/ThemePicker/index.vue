@@ -6,11 +6,11 @@
  * @Last Modified time: 2021-09-26 10:10:01
  -->
 <template>
-    <el-tooltip effect="dark" content="theme" placement="bottom">
+    <el-tooltip effect="dark" content="自定义主题"placement="bottom">
         <el-color-picker
             v-model="theme"
             class="theme-picker"
-            size="small"
+            size="mini"
             @change="changeColor"
             popper-class="theme-picker-dropdown"
         />
