@@ -1,2 +1,3 @@
-import app from './app.js'
-app.$mount('#app')
+import App from './app'
+
+App.mount('#app')

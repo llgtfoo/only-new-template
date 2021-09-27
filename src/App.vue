@@ -1,28 +1,33 @@
 <template>
-    <div class="wrapper">
-        <keep-alive :include="['Layout', 'SideMenu']">
-            <router-view></router-view>
-        </keep-alive>
-    </div>
+  <div class="wrapper">
+    <router-view v-slot="{ Component, route }">
+      <keep-alive v-if="Component && Object.keys(Component).length > 0">
+        <component :is="Component" :route="route"> </component>
+      </keep-alive>
+      <loading v-else></loading>
+    </router-view>
+  </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-        }
-    },
-    watch: {},
-    mounted() { },
-    created() { },
-}
+import { defineComponent } from 'vue'
+import { useStore } from 'vuex'
+export default defineComponent({
+  setup() {
+    const store = useStore()
+    // const { proxy } = getCurrentInstance()//获取App全局变量
+    return { store }
+  },
+})
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrapper {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 </style>
+
+

@@ -1,13 +1,13 @@
 /**
  * @name:注册全局指令
  */
-import * as directives from './*/index.js'
-
+const req = require.context('./', true, /\.js$/)
 export default {
-  install: function (Vue) {
-    Object.keys(directives).forEach(key => {
-      const d = directives[key]
-      Vue.use(d)
+  install: (Vue) => {
+    req.keys().map(req).forEach((ele) => {
+      if (ele.default) {
+        Vue.use(ele.default)
+      }
     })
-  },
+  }
 }

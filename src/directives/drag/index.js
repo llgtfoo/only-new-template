@@ -4,7 +4,7 @@
  */
 export default (Vue) => {
   Vue.directive('drag', {
-    inserted: function (el, binding) {
+    mounted: function (el, binding) {
       const { value } = binding
       const dragTarget = el.querySelector(value) || el // 如果指令的子节点设置了id为dragTarget，则会转移目标dom
       dragTarget.onmousedown = function (ev) {

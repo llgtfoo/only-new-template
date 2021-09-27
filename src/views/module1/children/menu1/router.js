@@ -1,17 +1,21 @@
-import SideMenu from '@/components/SideMenu/index.vue'
-import moduleMenu1 from './views/menu1-1/index.vue'
-export default () => ({
-    path: '/module1/menu1',
-    component: SideMenu,
-    redirect: '/module1/menu1/moduleMenu1',
-    meta: {
-        title: '实有人口',
-    },
-    children: [{
-        path: '/module1/menu1/moduleMenu1',
-        component: moduleMenu1,
+export default () => ([
+    {
+        path: '/module1/menu1',
+        name: '/module1/menu1',
+        component: () => import('@/components/SideMenu/index.vue'),
+        redirect: '/module1/menu1/index1',
         meta: {
-            title: '菜单一',
+            title: '子菜单一',
         },
-    }],
-})
+        children: [
+            {
+                path: '/module1/menu1/index1',
+                name: '/module1/menu1/index1',
+                component: () => import('./views/menu1-1/index.vue'),
+                meta: {
+                    title: '页面一',
+                },
+            }
+        ]
+    },
+])

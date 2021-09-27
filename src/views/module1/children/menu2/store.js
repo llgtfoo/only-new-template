@@ -1,4 +1,3 @@
-import { test } from './views/menu/api.js'
 
 const state = {
     home: 'home测试',
@@ -6,14 +5,6 @@ const state = {
 
 const actions = {
     // eslint-disable-next-line no-unused-vars
-    async getData({ commit }, proload) {
-        const res = await test(proload)
-        if (res && `${res.code}` === '200') {
-            return res
-        } else {
-            throw new Error(res.message)
-        }
-    },
 }
 
 const mutations = {

@@ -1,17 +1,18 @@
-// import module1 from './index.vue'
-import layout from '@/components/Layout/index.vue'
-import * as router from './children/*/router.js'
+const req = require.context('./', true, /router.js/i)//webpack读文件
 const children = []
-Object.keys(router).forEach(ele => {
-    children.push(router[ele]())
+req.keys().map(req).forEach((e) => {
+    if (e.default) {
+        children.push(...e.default())
+    }
 })
-
-export default () => ({
-    path: '/module1',
-    component: layout,
-    redirect: '/module1/menu1',
-    meta: {
-        title: '模块一',
-    },
-    children,
-})
+export default () => (
+    {
+        path: '/module1',
+        name: '/module1',
+        component: () => import('@/components/Layout/index.vue'),
+        redirect: '/module1/menu1',
+        meta: {
+            title: '模块一',
+        },
+        children: children
+    })

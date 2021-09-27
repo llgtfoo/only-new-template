@@ -6,7 +6,7 @@ import { Debounce } from '../../utils'
 import './children.polyfill'
 export default (Vue) => {
   Vue.directive('auto-scale', {
-    inserted: function (el, { value = { width: 1920, height: 1080 }}) {
+    mounted: function (el, { value = { width: 1920, height: 1080 }}) {
       const { width = 1920, height = 1080 } = value
       const wrapper = el
       console.dir(wrapper.children)

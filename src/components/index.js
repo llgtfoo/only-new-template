@@ -1,13 +1,11 @@
-/**
- * @name: 注册全局组件
- */
-import { formatComponentName } from '../utils'
-import * as components from './*/index.vue'
+const req = require.context('./', true, /\.vue$/)
+import { formatComponentName } from '../utils/index'
 export default {
-    install: function(Vue) {
-        Object.keys(components).forEach(key => {
-            const c = components[key]
-            Vue.component(formatComponentName(c.name), c)
-        })
-    },
+  install: (Vue) => {
+    req.keys().map(req).forEach((ele) => {
+      if (ele.default) {
+        Vue.component(formatComponentName(ele.default.name), ele.default)
+      }
+    })
+  }
 }

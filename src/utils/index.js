@@ -5,8 +5,14 @@
 export const formatComponentName = (name) => {
   const firstIndex = 0
   const deleteCount = 1
-  const str = name.replace(/([A-Z])/g, '-$1').toLowerCase()
-  return str.indexOf('-') === firstIndex ? str.substr(deleteCount) : str
+  if(!name){
+    console.error('存在未指定name的组件')
+    return
+  }else{
+   const str = name.replace(/([A-Z])/g, "-$1").toLowerCase()
+   return str.indexOf("-") === firstIndex ? str.substr(deleteCount) : str
+  }
+
 }
 
 /**
@@ -14,28 +20,31 @@ export const formatComponentName = (name) => {
  * @param {*} num 参数数字
  */
 export const toThousands = (num) => {
-  return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+  return num.toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,")
 }
 
 /**
  * 日期格式化
  * @param {*} num 参数数字
  */
-export const time = (val = new Date(), format = 'yy-mm-dd h:m:s') => {
+export const time = (val = new Date(), format = "yy-mm-dd h:m:s") => {
   let date = val
-  if (!date) { date = new Date() }
+  if (!date) {
+    date = new Date()
+  }
   const y = date.getFullYear()
-  const m = date.getMonth() + 1
+  const m= date.getMonth() + 1
   const d = date.getDate()
   const H = date.getHours()
-  const M = date.getMinutes()
+  const M= date.getMinutes()
   const S = date.getSeconds()
-  return format.replace('yy', y)
-    .replace('mm', m >= 10 ? m : `0${m}`)
-    .replace('dd', d >= 10 ? d : `0${d}`)
-    .replace('h', H >= 10 ? H : `0${H}`)
-    .replace('m', M >= 10 ? M : `0${M}`)
-    .replace('s', S >= 10 ? S : `0${S}`)
+  return format
+    .replace("yy", y)
+    .replace("mm", m >= 10 ? m : `0${m}`)
+    .replace("dd", d >= 10 ? d : `0${d}`)
+    .replace("h", H >= 10 ? H : `0${H}`)
+    .replace("m", M >= 10 ? M : `0${M}`)
+    .replace("s", S >= 10 ? S : `0${S}`)
 }
 
 /**
@@ -48,7 +57,7 @@ export const time = (val = new Date(), format = 'yy-mm-dd h:m:s') => {
 export const Debounce = (fn, t) => {
   const delay = t || 500
   let timer
-  return function () {
+  return function() {
     const args = arguments
     if (timer) {
       clearTimeout(timer)
@@ -70,7 +79,7 @@ export const Throttle = (fn, t) => {
   let last
   let timer
   const interval = t || 500
-  return function () {
+  return function() {
     const args = arguments
     const now = +new Date()
     if (last && now - last < interval) {
@@ -85,45 +94,11 @@ export const Throttle = (fn, t) => {
     }
   }
 }
-
-//获取后台url参数
-export const getUrlQuery = (url) => {
-  const temp1 = url.split('?')
-  // eslint-disable-next-line prefer-destructuring
-  const pram = temp1[1]
-  const keyValue = pram.split('&')
-  const obj = {}
-  for (let i = 0; i < keyValue.length; i++) {
-    const item = keyValue[i].split('=')
-    // eslint-disable-next-line prefer-destructuring
-    const key = item[0]
-    // eslint-disable-next-line prefer-destructuring
-    const value = item[1]
-    obj[key] = value
-  }
-  return obj
-}
-//递归菜单选中第一个
-export const recursionMenu = (menu) => {
-  function getKey(menu) {
-    let value = ''
-    if (menu.children) {
-      value = getKey(menu.children[0])
-    } else {
-      value = menu.cnameKey
-    }
-    return value
-  }
-  return getKey(menu)
-}
-
 export default {
-  install: (Vue) => {
-    Vue.prototype.$time = time
-    Vue.prototype.$Throttle = Throttle
-    Vue.prototype.$Debounce = Debounce
-    Vue.prototype.$toThousands = toThousands
-    Vue.prototype.$getUrlQuery = getUrlQuery
-    Vue.prototype.$recursionMenu = recursionMenu
+  install: (App) => {
+    App.config.globalProperties.$time = time
+    App.config.globalProperties.$Throttle = Throttle
+    App.config.globalProperties.$Debounce = Debounce
+    App.config.globalProperties.$toThousands = toThousands
   },
 }

@@ -1,18 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import common from './common/index'
-
-Vue.use(Vuex)
-
-const store = new Vuex.Store({
+const store = createStore({
   state: {
     email: 'llgtfoo@163.com',
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+  },
+  actions: {
+  },
   modules: {
-    common,
+    common
   },
   plugins: [createPersistedState({ paths: ['common'] })],
 })

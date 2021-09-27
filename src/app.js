@@ -1,42 +1,33 @@
-import '@/assets/css/init.css' //默认css
-import '@/assets/css/scroll.scss' //默认css
-import '@/lib/http/axios' //axios
-import { http } from '@/lib/http/index' //封装后的axios
-import echarts from 'echarts'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-//ui框架
-import Vue from 'vue'
-// 设置cookie
-import VueCookies from 'vue-cookies'
-import Fragment from 'vue-fragment'
+import '@/assets/css/init.css' //全局默认css
+import '@/assets/css/scroll.scss' //全局默认css
+import '@/icons/index' //svg图标
+ //ui库
+import * as echarts from 'echarts' //百度echarts图表
+import { createApp } from 'vue'
 import { sync } from 'vuex-router-sync'
-import App from './App.vue'
-import components from './components/index'
-import directives from './directives/index'
-// import './permission'
-import router from './router'
-import store from './store'
-import utils from './utils/index'
+import App from './App.vue' //入口文件
+import components from './components/index' //全局组件
+import directives from './directives/index' //全局指令
+import axios from './http/axios' //axios请求协议
+import http from './http/index' //自定义post和get协议
+//import "./permission" //路由守卫
+import router from './router' //路由
+import store from './store' //状态管理
+import utils from './utils/index' //全局工具函数
 import views from './views/index'
 
-Vue.use(ElementUI)
-Vue.use(VueCookies)
 
-Vue.use(components) //全局组件
-Vue.use(directives) //全局指令
-Vue.use(utils) //全局工具函数
 sync(store, router) //route和store结合
+const app = createApp(App)
+  .use(views, router, store)
+  .use(axios)
+  .use(store)
+  .use(router)
+  .use(components)
+  .use(directives)
+  .use(utils)
 
-Vue.use(Fragment.Plugin) //跟元素
-
-Vue.prototype.http = http
-Vue.prototype.echarts = echarts
-Vue.use(views, router, store)
-
-Vue.config.productionTip = false
-export default new Vue({
-    router,
-    store,
-    render: h => h(App),
-})
+//全局挂载
+app.config.globalProperties.$http = http
+app.config.globalProperties.$echarts = echarts
+export default app

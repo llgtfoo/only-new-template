@@ -1,6 +1,5 @@
-// import Vue from 'vue'
-// export const Bus = new Vue()
-
+// import { createApp } from "vue"
+// export const bus = createApp({})
 /**
  * @name: 中央事件总线Bus
  * @param 
