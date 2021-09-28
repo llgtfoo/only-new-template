@@ -10,7 +10,7 @@ const store = createStore({
   actions: {
   },
   modules: {
-    common
+    common,
   },
   plugins: [createPersistedState({ paths: ['common'] })],
 })

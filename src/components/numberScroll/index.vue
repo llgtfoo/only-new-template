@@ -22,27 +22,27 @@ export default {
   name: 'NumberScroll',
   components: { countTo },
   props: {
-    maxValue: {//最大值
+    maxValue: { //最大值
       type: [String, Number],
       default: 2020,
     },
-    duration: {//耗时
+    duration: { //耗时
       type: [String, Number],
       default: 2000,
     },
-    separator: {//千位分隔符
+    separator: { //千位分隔符
       type: [String, Number],
       default: ',',
     },
-    toFixed: {//保留小时
+    toFixed: { //保留小时
       type: [String, Number],
       default: 0,
     },
-    prefix: {//前缀
+    prefix: { //前缀
       type: [String, Number],
       default: '',
     },
-    suffix: {//后缀
+    suffix: { //后缀
       type: [String, Number],
       default: '',
     },

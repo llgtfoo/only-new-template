@@ -9,7 +9,7 @@ export const api = {
 const state = {
   userInfo: { //用户信息
     orgId: '1',
-    name: "李四"
+    name: '李四',
   },
   currentMenu: {}, //当前菜单项
   userTheme: 'default', //主题

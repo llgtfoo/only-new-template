@@ -7,12 +7,11 @@ req.keys().map(req).forEach((e) => {
 })
 export default () => (
   {
-    path: '/module1',
-    name: '/module1',
-    component: () => import('@/components/Layout/index.vue'),
-    redirect: '/module1/menu1',
+    path: '/home',
+    redirect: '/home/index',
     meta: {
-      title: '模块一',
+      title: '首页',
     },
-    children: children,
+    component: () => import('@/components/Layout/index.vue'),
+    children,
   })

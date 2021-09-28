@@ -1,7 +1,8 @@
 import '@/assets/css/init.css' //全局默认css
 import '@/assets/css/scroll.scss' //全局默认css
 import '@/icons/index' //svg图标
- //ui库
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'//ui库
 import * as echarts from 'echarts' //百度echarts图表
 import { createApp } from 'vue'
 import { sync } from 'vuex-router-sync'
@@ -26,6 +27,7 @@ const app = createApp(App)
   .use(components)
   .use(directives)
   .use(utils)
+  .use(ElementPlus)
 
 //全局挂载
 app.config.globalProperties.$http = http

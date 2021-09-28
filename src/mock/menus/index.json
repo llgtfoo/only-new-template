@@ -1,5 +1,11 @@
 [
     {
+        "cname": "首页",
+        "cnameKey": "/home",
+        "normalUrl": "/home",
+        "icon": ""
+    },
+    {
         "cname": "模块一",
         "cnameKey": "/module1",
         "normalUrl": "/module1",
@@ -26,7 +32,7 @@
                 "icon": "icon-office-supplies-fill",
                 "children": [
                     {
-                        "cname": "页面一",
+                        "cname": "页面二",
                         "cnameKey": "/module1/menu2/index1",
                         "normalUrl": "/module1/menu2/index1",
                         "icon": "icon-Moneymanagement-fill"
@@ -48,7 +54,7 @@
                 "icon": "icon-Moneymanagement-fill",
                 "children": [
                     {
-                        "cname": "页面一",
+                        "cname": "页面1",
                         "cnameKey": "/module2/menu1/index1",
                         "normalUrl": "/module2/menu1/index1",
                         "icon": "icon-Moneymanagement-fill"
