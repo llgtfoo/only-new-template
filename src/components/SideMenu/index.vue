@@ -142,6 +142,10 @@ export default defineComponent({
     onMounted(() => {
       state.activeIndex = route.fullPath
     })
+    const menus = computed(() => {
+      return store.getters['common/user/getCurrentMenu'] &&
+        store.getters['common/user/getCurrentMenu']['children']
+    })
     watchEffect(() => {
       state.activeIndex = route.fullPath
       console.log(state.activeIndex, route.fullPath, 'route.fullPath')
@@ -154,10 +158,6 @@ export default defineComponent({
         }
       }
       state.activeName = route.fullPath
-    })
-    const menus = computed(() => {
-      return store.getters['common/user/getCurrentMenu'] &&
-        store.getters['common/user/getCurrentMenu']['children']
     })
     watch(() => state.tabList, (newVal) => {
       console.log(newVal, 'newVal')
