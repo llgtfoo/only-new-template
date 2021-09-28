@@ -3,21 +3,21 @@
 
 /**
  * @name: 中央事件总线Bus
- * @param 
+ * @param
  */
 class Bus {
-    callbacks: object = {}
+    callbacks = {}
     constructor() {
-        this.callbacks = {}
+      this.callbacks = {}
     }
-    $on(name: string, fn: Function) {
-        this.callbacks[name] = this.callbacks[name] || []
-        this.callbacks[name].push(fn)
+    $on(name, fn) {
+      this.callbacks[name] = this.callbacks[name] || []
+      this.callbacks[name].push(fn)
     }
-    $emit(name: string, args: any[]) {
-        if (this.callbacks[name]) {
-            this.callbacks[name].forEach((cb: Function) => cb(args))
-        }
+    $emit(name, args) {
+      if (this.callbacks[name]) {
+        this.callbacks[name].forEach((cb) => cb(args))
+      }
     }
 }
 
