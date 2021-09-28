@@ -1,25 +1,22 @@
 <template>
-  <el-container
-    style="height: 100%"
-    v-water-marker="{
+  <el-container style="height: 100%">
+    <!-- v-water-marker="{
       width: '300px',
       height: '150px',
       content: '系统名称',
-    }"
-  >
+    }" -->
     <el-aside :style="{ width: `${!isCollapse ? '250px' : '65px'}` }">
       <el-menu
         :default-active="activeIndex"
         class="el-menu-vertical"
         :collapse="isCollapse"
         :unique-opened="true"
-        :router="true"
-        :default-openeds="defaultOpeneds"
+        :router="false"
         @select="selectMenu"
       >
         <template v-for="item in menus">
           <template v-if="item && item.children && item.children.length > 0">
-            <sub-menu :menuInfo="item" :key="item.cnameKey" />
+            <sub-menu :menuInfo="item" :key="item.normalUrl" />
           </template>
           <template v-else>
             <el-menu-item :index="item.normalUrl" :key="item.normalUrl">
@@ -68,7 +65,11 @@
           </el-tab-pane>
         </el-tabs>
         <div class="breadcrumb-tool">
-          <el-dropdown @command="handleCommand">
+          <el-dropdown
+            @command="handleCommand"
+            placement="right"
+            trigger="click"
+          >
             <i class="el-icon-arrow-down" style="fontsize: 18px"></i>
             <template #dropdown>
               <el-dropdown-menu>
@@ -117,20 +118,12 @@ const SubMenu = {
     },
   },
 }
-import {
-  defineComponent, reactive, ref, toRefs,
-  nextTick, computed, onMounted, watch, watchEffect
-} from 'vue'
-import { useStore } from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
+import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'SideMenu',
   components: { SubMenu },
-  setup() {
-    const store = useStore()
-    const router = useRouter()
-    const route = useRoute()
-    const state = reactive({
+  data() {
+    return {
       activeName: '',
       isCollapse: false,
       activeIndex: '', //选中菜单项
@@ -138,70 +131,89 @@ export default defineComponent({
       tabList: [], //打开的菜单集合
       isRouterActive: true,
       closable: true,
-    })
-    onMounted(() => {
-      state.activeIndex = route.fullPath
-    })
-    const menus = computed(() => {
-      return store.getters['common/user/getCurrentMenu'] &&
-        store.getters['common/user/getCurrentMenu']['children']
-    })
-    watchEffect(() => {
-      state.activeIndex = route.fullPath
-      console.log(state.activeIndex, route.fullPath, 'route.fullPath')
-      if (state.tabList.findIndex(item => item.path === route.fullPath) === -1) {
-        if (route.meta.title) {
-          state.tabList.push({
-            name: route.meta.title,
-            path: route.fullPath,
-          })
+    }
+  },
+  computed: {
+    //获取二级菜单
+    menus() {
+      return this.$store.getters['common/user/getCurrentMenu'] && this.$store.getters['common/user/getCurrentMenu'][
+        'children'
+      ]
+    },
+  },
+  watch: {
+    $route: {
+      handler(route) {
+        if (route) {
+          console.log(route)
+          this.activeIndex = route.fullPath
+          if (this.tabList.findIndex(item => item.path === route.fullPath) === -1) {
+            if (route.meta.title) {
+              this.tabList.push({
+                name: route.meta.title,
+                path: route.fullPath,
+              })
+            }
+          }
+          this.activeName = route.fullPath
+          // this.$forceUpdate()
         }
-      }
-      state.activeName = route.fullPath
-    })
-    watch(() => state.tabList, (newVal) => {
-      console.log(newVal, 'newVal')
-      if (newVal.length === 1) {
-        state.closable = false
-      } else {
-        state.closable = true
-      }
-    })
+      },
+      deep: true,
+      immediate: true,
+    },
+    //监听tab标签页长度
+    tabList: {
+      handler(newVal) {
+        if (newVal.length === 1) {
+          this.closable = false
+        } else {
+          this.closable = true
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.activeIndex = this.$route.fullPath
+  },
+  methods: {
     //选中菜单
-    function selectMenu(index, path) {
-      console.log(index, path)
-    }
+    selectMenu(index, path) {
+      // console.log(index, path)
+      this.$router.push(index)
+    },
     //tab点击
-    function handleClick(tab) {
-      router.push(tab.props.name)
-    }
+    handleClick(tab) {
+      this.$router.push(tab.props.name)
+    },
     //tab关闭
-    function removeTab(tab) {
-      const index = state.tabList.findIndex(v => v.path === tab)
+    removeTab(tab) {
+      const index = this.tabList.findIndex(v => v.path === tab)
       if (index !== -1) {
-        state.tabList.splice(index, 1)
+        this.tabList.splice(index, 1)
       }
-      if (tab === route.fullPath) {
-        router.push(state.tabList[state.tabList.length - 1].path)
+      if (tab === this.$route.fullPath) {
+        this.$router.push(this.tabList[this.tabList.length - 1].path)
       }
-    }
+    },
     //工具栏
-    function handleCommand(item) {
+    handleCommand(item) {
       if (item === 'refresh') {
-        state.isRouterActive = false
-        nextTick(function () {
-          state.isRouterActive = true
+        this.isRouterActive = false
+        this.$nextTick(function () {
+          this.isRouterActive = true
         })
       } else if (item === 'all') {
-        state.tabList = []
-        state.tabList.push({
-          name: route.meta.title,
-          path: route.fullPath,
+        this.tabList = []
+        this.tabList.push({
+          name: this.$route.meta.title,
+          path: this.$route.fullPath,
         })
-        state.activeName = route.fullPath
+        this.activeName = this.$route.fullPath
       }
-    }
-    return { ...toRefs(state), menus, handleCommand, removeTab, handleClick, selectMenu }
+    },
   },
 })
 </script>
