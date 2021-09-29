@@ -1,120 +1,95 @@
 # tpl-hr-vue
 
-vue 开发项目模板- 基于 element UI 封装组件
+# vue 开发项目模板- 基于vue2.0 element UI 封装组件
 
-内容包括：
+# 内容包括：模块化开发方案、table封装、菜单递归、自定义换肤
 
 ```
 tpl-hr-vue
-├─ .eslintrc.js
-├─ .gitignore
-├─ babel.config.js
-├─ package-lock.json
-├─ package.json
-├─ postcss.config.js
-├─ public
-│  ├─ favicon.ico
-│  ├─ index.html
-│  └─ iocnFont
-├─ README.md
-├─ src
-│  ├─ app.js
-│  ├─ App.vue
-│  ├─ assets
-│  │  ├─ css
-│  │  │  ├─ init.css
-│  │  │  ├─ scroll.css
-│  │  │  └─ scroll.scss
-│  │  ├─ imgs
-│  │  │  └─ login.png
-│  │  └─ svg
-│  │     └─ logo.svg
-│  ├─ components
-│  │  ├─ echartCommon
-│  │  │  └─ index.vue
-│  │  ├─ eTable
-│  │  │  └─ index.vue
-│  │  ├─ index.js
-│  │  ├─ Layout
-│  │  │  └─ index.vue
-│  │  ├─ Loading
-│  │  │  └─ index.vue
-│  │  ├─ NotData
-│  │  │  ├─ assets
-│  │  │  │  └─ not-data.png
-│  │  │  └─ index.vue
-│  │  ├─ NotFound
-│  │  │  ├─ assets
-│  │  │  │  └─ 404.png
-│  │  │  └─ index.vue
-│  │  ├─ SideMenu
-│  │  │  └─ index.vue
-│  │  └─ ThemePicker
-│  │     └─ index.vue
-│  ├─ directives
-│  │  ├─ auto-scale
-│  │  │  └─ index.js
-│  │  ├─ drag
-│  │  │  └─ index.js
-│  │  ├─ index.js
-│  │  └─ water-marker
-│  │     └─ index.js
-│  ├─ lib
-│  │  └─ http
-│  │     ├─ axios.js
-│  │     └─ index.js
-│  ├─ main.js
-│  ├─ mock
-│  │  ├─ index.json
-│  │  └─ menu
-│  │     └─ menu.json
-│  ├─ permission.js
-│  ├─ router
-│  │  └─ index.js
-│  ├─ store
-│  │  ├─ common
-│  │  │  ├─ index.js
-│  │  │  └─ modules
-│  │  │     └─ user.js
-│  │  └─ index.js
-│  ├─ utils
-│  │  ├─ bus.js
-│  │  ├─ doAnimation.js
-│  │  └─ index.js
-│  └─ views
-│     ├─ home
-│     │  ├─ children
-│     │  │  └─ home
-│     │  │     ├─ api.js
-│     │  │     ├─ index.vue
-│     │  │     ├─ router.js
-│     │  │     └─ store.js
-│     │  ├─ index.js
-│     │  ├─ router.js
-│     │  └─ store.js
-│     ├─ index.js
-│     ├─ login
-│     │  └─ index.vue
-│     └─ module1
-│        ├─ children
-│        │  ├─ menu1
-│        │  │  ├─ router.js
-│        │  │  ├─ store.js
-│        │  │  └─ views
-│        │  │     └─ menu1-1
-│        │  │        ├─ api.js
-│        │  │        ├─ columns.js
-│        │  │        └─ index.vue
-│        │  └─ menu2
-│        │     ├─ router.js
-│        │     ├─ store.js
-│        │     └─ views
-│        │        └─ menu
-│        │           ├─ api.js
-│        │           └─ index.vue
-│        ├─ index.js
-│        ├─ router.js
-│        └─ store.js
-└─ vue.config.js
+├─ .eslintrc.js ------------------------------> eslint校验规则
+├─ .gitignore --------------------------------> git提交忽略文件
+├─ babel.config.js ---------------------------> babel相关配置
+├─ package.json ------------------------------> 依赖包
+├─ postcss.config.js -------------------------> postcss相关配置
+├─ public ------------------------------------> 
+│  ├─ favicon.ico-----------------------------> ico图标
+│  ├─ index.html -----------------------------> 页面html
+│  └─ iocnFont -------------------------------> 阿里云离线图标
+├─ README.md ---------------------------------> 说明文档
+├─ src ---------------------------------------> 
+│  ├─ app.js ---------------------------------> Vue实例生成，各全局配置
+│  ├─ App.vue --------------------------------> 入口文件
+│  ├─ assets ---------------------------------> 静态资源集合
+│  │  ├─ css ---------------------------------> 静态资源css
+│  │  ├─ imgs --------------------------------> 静态资源img
+│  │  └─ svg ---------------------------------> 静态资源svg
+│  ├─ components -----------------------------> 全局组件集合
+│  │  ├─ echartCommon ------------------------> echart组件
+│  │  ├─ eTable ------------------------------> element table组件封装
+│  │  ├─ index.js ----------------------------> 全局组件注册入口
+│  │  ├─ Layout ------------------------------> 导航栏组件
+│  │  ├─ Loading -----------------------------> loading组件
+│  │  ├─ NotData -----------------------------> 无数据组件
+│  │  ├─ NotFound ----------------------------> 路由未找到组件
+│  │  ├─ SideMenu ----------------------------> 菜单组件
+│  │  └─ ThemePicker -------------------------> 一键换肤组件
+│  ├─ directives -----------------------------> 全局指令集合
+│  │  ├─ auto-scale --------------------------> 尺寸缩放指令
+│  │  ├─ drag --------------------------------> 鼠标自由拖拽指令
+│  │  ├─ index.js ----------------------------> 全局指令注册
+│  │  └─ water-marker ------------------------> 系统水印指令
+│  ├─ lib ------------------------------------> 工具包集合
+│  │  └─ http --------------------------------> 接口请求工具
+│  │     ├─ axios.js -------------------------> axios
+│  │     └─ index.js -------------------------> post/get封装
+│  ├─ main.js --------------------------------> 入口文件
+│  ├─ mock -----------------------------------> 静态mock数据
+│  ├─ permission.js --------------------------> 路由守卫
+│  ├─ router ---------------------------------> 路由入口
+│  ├─ store ----------------------------------> store集合
+│  │  ├─ common ------------------------------> common 状态管理
+│  │  │  ├─ index.js -------------------------> 
+│  │  │  └─ modules --------------------------> store module
+│  │  │     └─ user.js -----------------------> 
+│  │  └─ index.js ----------------------------> store 配置
+│  ├─ utils ----------------------------------> 工具函数集合
+│  │  ├─ bus.js ------------------------------> 中央事件总线
+│  │  ├─ index.js ----------------------------> 工具函数
+│  |  └─ doAnimation.js ----------------------> echart动画工具函数
+│  └─ views ----------------------------------> 页面视图
+│     ├─ home --------------------------------> 首页
+│     │  ├─ children ------------------------->
+│     │  │  └─ home --------------------------> 
+│     │  │     ├─ api.js ---------------------> 页面接口api集合
+│     │  │     ├─ index.vue ------------------> 首页vue组件
+│     │  │     ├─ router.js ------------------> 路由
+│     │  │     └─ store.js -------------------> 状态管理
+│     │  ├─ index.js -------------------------> router和store注册
+│     │  ├─ router.js ------------------------> router收集
+│     │  └─ store.js -------------------------> store module收集
+│     ├─ index.js ----------------------------> router和store全局注册
+│     ├─ login -------------------------------> 登录页
+│     │  └─ index.vue ------------------------>
+│     └─ module1 -----------------------------> 模块一
+│        ├─ children ------------------------->
+│        │  ├─ menu1 -------------------------> 菜单一
+│        │  │  ├─ router.js ------------------> 
+│        │  │  ├─ store.js ------------------->
+│        │  │  └─ views ----------------------> 子菜单集合
+│        │  │     └─ menu1-1 -----------------> 子菜单
+│        │  │        ├─ api.js --------------->
+│        │  │        ├─ columns.js ----------->
+│        │  │        └─ index.vue ------------>
+│        │  └─ menu2 -------------------------> 菜单二
+│        │     ├─ router.js ------------------>
+│        │     ├─ store.js ------------------->
+│        │     └─ views ----------------------> 子菜单集合
+│        │        └─ menu --------------------> 子菜单
+│        │           ├─ api.js --------------->
+│        │           └─ index.vue ------------>
+│        ├─ index.js -------------------------> router和store全局注册
+│        ├─ router.js ------------------------> router收集
+│        └─ store.js -------------------------> store module收集
+└─ vue.config.js -----------------------------> vue cli 相关配置
 
 ```
