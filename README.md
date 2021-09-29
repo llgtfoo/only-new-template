@@ -1,8 +1,8 @@
 # tpl-hr-vue
 
-vue 开发项目模板- 基于 element UI 封装组件
+# vue 开发项目模板- 基于vue2.0 + element UI 
 
-内容包括：
+# 内容包括： table、自定义换肤、路由守卫、菜单递归
 
 ```
 tpl-hr-vue
@@ -22,43 +22,23 @@ tpl-hr-vue
 │  ├─ App.vue
 │  ├─ assets
 │  │  ├─ css
-│  │  │  ├─ init.css
-│  │  │  ├─ scroll.css
-│  │  │  └─ scroll.scss
 │  │  ├─ imgs
-│  │  │  └─ login.png
 │  │  └─ svg
-│  │     └─ logo.svg
 │  ├─ components
 │  │  ├─ echartCommon
-│  │  │  └─ index.vue
 │  │  ├─ eTable
-│  │  │  └─ index.vue
 │  │  ├─ index.js
 │  │  ├─ Layout
-│  │  │  └─ index.vue
 │  │  ├─ Loading
-│  │  │  └─ index.vue
 │  │  ├─ NotData
-│  │  │  ├─ assets
-│  │  │  │  └─ not-data.png
-│  │  │  └─ index.vue
 │  │  ├─ NotFound
-│  │  │  ├─ assets
-│  │  │  │  └─ 404.png
-│  │  │  └─ index.vue
 │  │  ├─ SideMenu
-│  │  │  └─ index.vue
 │  │  └─ ThemePicker
-│  │     └─ index.vue
 │  ├─ directives
 │  │  ├─ auto-scale
-│  │  │  └─ index.js
 │  │  ├─ drag
-│  │  │  └─ index.js
 │  │  ├─ index.js
 │  │  └─ water-marker
-│  │     └─ index.js
 │  ├─ lib
 │  │  └─ http
 │  │     ├─ axios.js
@@ -95,23 +75,39 @@ tpl-hr-vue
 │     ├─ index.js
 │     ├─ login
 │     │  └─ index.vue
-│     └─ module1
+│     ├─ module1
+│     │  ├─ children
+│     │  │  ├─ menu1
+│     │  │  │  ├─ router.js
+│     │  │  │  ├─ store.js
+│     │  │  │  └─ views
+│     │  │  │     ├─ api.js
+│     │  │  │     ├─ columns.js
+│     │  │  │     └─ index.vue
+│     │  │  └─ menu2
+│     │  │     ├─ router.js
+│     │  │     ├─ store.js
+│     │  │     └─ views
+│     │  │        ├─ api.js
+│     │  │        └─ index.vue
+│     │  ├─ index.js
+│     │  ├─ router.js
+│     │  └─ store.js
+│     └─ module2
 │        ├─ children
 │        │  ├─ menu1
 │        │  │  ├─ router.js
 │        │  │  ├─ store.js
 │        │  │  └─ views
-│        │  │     └─ menu1-1
-│        │  │        ├─ api.js
-│        │  │        ├─ columns.js
-│        │  │        └─ index.vue
+│        │  │     ├─ api.js
+│        │  │     ├─ columns.js
+│        │  │     └─ index.vue
 │        │  └─ menu2
 │        │     ├─ router.js
 │        │     ├─ store.js
 │        │     └─ views
-│        │        └─ menu
-│        │           ├─ api.js
-│        │           └─ index.vue
+│        │        ├─ api.js
+│        │        └─ index.vue
 │        ├─ index.js
 │        ├─ router.js
 │        └─ store.js

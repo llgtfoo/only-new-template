@@ -7,11 +7,11 @@ Object.keys(router).forEach(ele => {
 })
 
 export default () => ({
-  path: '/module1',
+  path: '/module2',
   component: layout,
-  redirect: '/module1/menu1',
+  redirect: '/module2/menu1',
   meta: {
-    title: '菜单一',
+    title: '菜单二',
   },
   children,
 })

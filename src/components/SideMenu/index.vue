@@ -24,7 +24,7 @@
         :default-openeds="defaultOpeneds"
         @select="selectMenu"
       >
-        <template v-for="item in menus">
+        <template v-for="item in menuJson">
           <template v-if="item && item.children && item.children.length > 0">
             <sub-menu :menuInfo="item" :key="item.cnameKey" />
           </template>
@@ -78,9 +78,11 @@
           <el-dropdown @command="handleCommand">
             <i class="el-icon-arrow-down" style="fontsize: 18px"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="all"> 关闭全部 </el-dropdown-item>
+              <el-dropdown-item command="all">
+                关闭其他标签页
+              </el-dropdown-item>
               <el-dropdown-item command="refresh">
-                刷新当前页
+                刷新当前标签页
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -122,6 +124,7 @@ const SubMenu = {
     },
   },
 }
+import menuJson from '@/mock/menu/menu.json'
 export default {
   name: 'SideMenu',
   components: { SubMenu },
@@ -134,6 +137,7 @@ export default {
       tabList: [], //打开的菜单集合
       isRouterActive: true,
       closable: true,
+      menuJson,
     }
   },
   computed: {
@@ -202,7 +206,7 @@ export default {
     handleCommand(item) {
       if (item === 'refresh') {
         this.isRouterActive = false
-        this.$nextTick(function () {
+        this.$nextTick(() => {
           this.isRouterActive = true
         })
       } else if (item === 'all') {

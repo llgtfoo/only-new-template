@@ -8,23 +8,6 @@
   <el-container style="height: 100vh">
     <el-header class="el-header">
       <div class="logo">系统名称</div>
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#409eff"
-        text-color="#fff"
-        active-text-color="#fff"
-      >
-        <el-menu-item
-          :index="item.normalUrl"
-          v-for="item in menuList"
-          :key="item.normalUrl"
-        >
-          {{ item.cname }}
-        </el-menu-item>
-      </el-menu>
       <div class="user-info">
         <el-dropdown @command="handleCommand">
           <el-avatar
@@ -46,50 +29,22 @@
       </div>
     </el-header>
     <div style="height: calc(100% - 60px)">
-      <router-view></router-view>
+      <side-menu></side-menu>
     </div>
   </el-container>
 </template>
 
 <script>
-import menuJson from '@/mock/menu/menu.json'
 export default {
   name: 'Layout',
   data() {
     return {
-      menuList: menuJson,
-      activeIndex: '',
-      activeIndex2: '',
     }
   },
-  //监听路由变化
-  watch: {
-    $route: {
-      handler(route) {
-        this.activeIndex = this.getSelectorMenu()
-        const menus = this.menuList.filter((ele) => {
-          return ele.cnameKey === route.matched[0].path
-        })
-        this.$store.dispatch('common/user/doCurrentMenu', menus[0])
-      },
-      deep: true,
-      immediate: true,
-    },
-  },
+
   created() {
-    this.activeIndex = this.getSelectorMenu()
   },
   methods: {
-    //获取选中的菜单
-    getSelectorMenu() {
-      return this.$route.matched[0].path
-    },
-    //点击菜单
-    // eslint-disable-next-line no-unused-vars
-    handleSelect(key, keyPath) {
-      // console.log(key, keyPath)
-      this.$router.push(key)
-    },
     handleCommand(command) {
       console.log(command)
     },
@@ -104,13 +59,14 @@ export default {
   width: 100%;
   padding: 0;
   align-items: center;
+  justify-content: space-between;
+  background: #409eff;
   .el-menu {
     width: calc(100% - 400px);
   }
 }
 .logo {
   width: 250px;
-  background: #409eff;
   height: 100%;
   display: flex;
   align-items: center;
@@ -151,7 +107,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #409eff;
   .theme-picker {
     margin-left: 10px;
   }

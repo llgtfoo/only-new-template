@@ -1,24 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>
-        <%= htmlWebpackPlugin.options.title %>
-    </title>
-    <link rel="stylesheet" href="./iocnFont/iconfont.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+        <title>
+            <%= htmlWebpackPlugin.options.title %>
+            </title>
+            <link rel="stylesheet" href="./iocnFont/iconfont.css">
+        </head>
 
-<body>
-    <noscript>
-    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
-        Please enable it to continue.</strong>
-  </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-</body>
+        <body>
+            <noscript>
+                <strong>We're sorry but <%= htmlWebpackPlugin.options.title %>
+                        doesn't work properly without JavaScript enabled.
+                        Please enable it to continue.</strong>
+                </noscript>
+                <div id="app">
+                    <style>
+                        .loading-warp {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #ffffff;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.loading {
+  position: absolute;
+  z-index: 1001;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
 
-</html>
+.dot {
+  width: 24px;
+  height: 24px;
+  background: #3ac;
+  border-radius: 100% !important;
+  display: inline-block;
+  animation: slide 1s infinite;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0.1s;
+  background: #32aacc;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+  background: #64aacc;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+  background: #96aacc;
+}
+
+.dot:nth-child(4) {
+  animation-delay: 0.4s;
+  background: #c8aacc;
+}
+
+.dot:nth-child(5) {
+  animation-delay: 0.5s;
+  background: #faaacc;
+}
+
+@-moz-keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@-o-keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+                    </style>
+                    <div class="loading-warp">
+                        <div class="loading">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+
+        </html>

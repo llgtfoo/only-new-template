@@ -27,5 +27,5 @@ export default (Vue, router, store) => {
                 redirect: '/404',
             },
         ])
-    console.log(router, 'router')
+    console.log(router.getRoutes(), 'router')
 }
