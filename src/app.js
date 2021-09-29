@@ -1,9 +1,11 @@
 import '@/assets/css/init.css' //全局默认css
 import '@/assets/css/scroll.scss' //全局默认css
 import '@/icons/index' //svg图标
+
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'//ui库
 import locale from 'element-plus/lib/locale/lang/zh-cn' //中文
+
 import * as echarts from 'echarts' //百度echarts图表
 import { createApp } from 'vue'
 import { sync } from 'vuex-router-sync'

@@ -25,12 +25,12 @@
     </template>
   </e-table>
 </template>
-
 <script>
 import { stockColumn } from './columns'
+import { reactive, toRefs } from 'vue'
 export default {
-  data() {
-    return {
+  setup() {
+    const state = reactive({
       isloading: false,
       data: [
         {
@@ -73,30 +73,31 @@ export default {
       currentPage: 10,
       pageSize: 10,
       totalPage: 100,
-    }
-  },
-  mounted() { },
-  methods: {
+    })
     //点击行
-    cellClick({ row, column, event }) {
+    function cellClick({ row, column, event }) {
       console.log(row, column, event)
-    },
+    }
     //页码改变
-    currentChange(page) {
+    function currentChange(page) {
       console.log(page)
-    },
+    }
     //页条数改变
-    sizeChange(size) {
+    function sizeChange(size) {
       console.log(size)
-    },
+    }
     //多选项
-    selectionChange(selection) {
+    function selectionChange(selection) {
       console.log(selection)
-    },
-    handleClick(data) {
+    }
+    function handleClick(data) {
       console.log(data, 'data')
-    },
-  },
+    }
+    return {
+      ...toRefs(state), cellClick, handleClick,
+      selectionChange, sizeChange, currentChange
+    }
+  }
 }
 </script>
 
