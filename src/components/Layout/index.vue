@@ -1,3 +1,11 @@
+<!--
+ * @Description:  系统导航栏
+ * @Author: llgtfoo
+ * @Date: 2021-09-28 16:30:26
+ * @LastEditTime: 2021-09-29 08:44:24
+ * @LastEditors: llgtfoo
+ * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
+-->
 <template>
   <el-container style="height: 100vh">
     <el-header class="el-header">
@@ -37,11 +45,18 @@
           </template>
         </el-dropdown>
         <div class="theme-picker">
-          <!-- <theme-picker></theme-picker> -->
+          <theme-picker></theme-picker>
         </div>
       </div>
     </el-header>
-    <div style="height: calc(100% - 60px)">
+    <div
+      style="height: calc(100% - 60px); width: 100%"
+      v-water-marker="{
+        width: '350px',
+        height: '150px',
+        content: '系统名称',
+      }"
+    >
       <router-view></router-view>
     </div>
   </el-container>

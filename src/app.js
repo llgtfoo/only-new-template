@@ -3,6 +3,7 @@ import '@/assets/css/scroll.scss' //全局默认css
 import '@/icons/index' //svg图标
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'//ui库
+import locale from 'element-plus/lib/locale/lang/zh-cn' //中文
 import * as echarts from 'echarts' //百度echarts图表
 import { createApp } from 'vue'
 import { sync } from 'vuex-router-sync'
@@ -27,7 +28,7 @@ const app = createApp(App)
   .use(components)
   .use(directives)
   .use(utils)
-  .use(ElementPlus)
+  .use(ElementPlus,{locale})
 
 //全局挂载
 app.config.globalProperties.$http = http

@@ -12,7 +12,7 @@ const state = {
     name: '李四',
   },
   currentMenu: {}, //当前菜单项
-  userTheme: 'default', //主题
+  userTheme: '#0791F4', //主题
 }
 
 // 异步操作放到action handler里
@@ -52,6 +52,7 @@ const mutations = {
   SET_CURRENT_MENU(state, info) {
     state.currentMenu = info
   },
+
 }
 
 const getters = {

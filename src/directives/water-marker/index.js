@@ -1,12 +1,14 @@
-/**
- * @name:系统水印
- * @param {type}
+/*
+ * @Description: 系统水印
+ * @Author: llgtfoo
+ * @Date: 2021-09-28 16:30:26
+ * @LastEditTime: 2021-09-29 09:36:46
+ * @LastEditors: llgtfoo
+ * @FilePath: \tpl-hr-vue\src\directives\water-marker\index.js
  */
-
 export default (Vue) => {
   Vue.directive('water-marker', {
     mounted: function (el, { value }) {
-      console.log(el, value)
       const canvas = document.createElement('canvas')
       const {
         width = '200px',
@@ -52,7 +54,6 @@ export default (Vue) => {
       el.insertBefore(watermarkDiv, el.firstChild)
     },
     beforeUpdate(el, { value, oldValue }) {
-      console.log(el)
       const opt = Object.assign({
         width: '200px',
         height: '150px',
@@ -79,7 +80,6 @@ export default (Vue) => {
       ctx.rotate(Math.PI / 180 * opt.rotate)
       const texts = opt.content.split('\n')
       texts.forEach((t, index) => {
-        console.log(index)
         ctx.fillText(t, 50, 60 + 20 * index)
       })
 

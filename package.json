@@ -14,7 +14,6 @@
     "echarts": "^5.0.2",
     "element-plus": "^1.1.0-beta.17",
     "svg-sprite-loader": "^6.0.0",
-    "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-count-to": "^1.0.13",
@@ -41,7 +40,8 @@
     "postcss-loader": "^3.0.0",
     "postcss-url": "^8.0.0",
     "precss": "^4.0.0",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "vue": "^3.2.19"
   },
   "keywords": [
     "子应用模板",

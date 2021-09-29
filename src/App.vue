@@ -1,7 +1,10 @@
 <template>
   <div class="wrapper">
     <router-view v-slot="{ Component, route }">
-      <keep-alive v-if="Component && Object.keys(Component).length > 0">
+      <keep-alive
+        v-if="Component && Object.keys(Component).length > 0"
+        :include="['Layout', 'SideMenu']"
+      >
         <component :is="Component" :route="route"> </component>
       </keep-alive>
       <loading v-else></loading>

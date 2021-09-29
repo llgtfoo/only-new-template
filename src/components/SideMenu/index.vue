@@ -1,18 +1,15 @@
 <template>
   <el-container style="height: 100%">
-    <!-- v-water-marker="{
-      width: '300px',
-      height: '150px',
-      content: '系统名称',
-    }" -->
     <el-aside :style="{ width: `${!isCollapse ? '250px' : '65px'}` }">
       <el-menu
-        :default-active="activeIndex"
+        v-if="menus.length > 0"
         class="el-menu-vertical"
         :collapse="isCollapse"
         :unique-opened="true"
-        :router="false"
+        :router="true"
         @select="selectMenu"
+        :default-openeds="defaultOpeneds"
+        :default-active="activeIndex"
       >
         <template v-for="item in menus">
           <template v-if="item && item.children && item.children.length > 0">
@@ -65,11 +62,7 @@
           </el-tab-pane>
         </el-tabs>
         <div class="breadcrumb-tool">
-          <el-dropdown
-            @command="handleCommand"
-            placement="right"
-            trigger="click"
-          >
+          <el-dropdown @command="handleCommand" placement="bottom-end">
             <i class="el-icon-arrow-down" style="fontsize: 18px"></i>
             <template #dropdown>
               <el-dropdown-menu>
@@ -117,6 +110,7 @@ const SubMenu = {
       default: () => ({}),
     },
   },
+  components: { SubMenu },
 }
 import { defineComponent } from 'vue'
 export default defineComponent({
@@ -131,21 +125,36 @@ export default defineComponent({
       tabList: [], //打开的菜单集合
       isRouterActive: true,
       closable: true,
+      menus: [],
     }
   },
   computed: {
     //获取二级菜单
-    menus() {
-      return this.$store.getters['common/user/getCurrentMenu'] && this.$store.getters['common/user/getCurrentMenu'][
-        'children'
-      ]
+    smenus() {
+      return this.$store.getters['common/user/getCurrentMenu'] &&
+        this.$store.getters['common/user/getCurrentMenu']['children']
     },
   },
   watch: {
+    //为了重新渲染菜单
+    smenus: {
+      handler(route) {
+        if (route) {
+          this.menus = []
+          this.$nextTick(() => {
+            if (route.length > 0) {
+              this.menus = route
+            }
+          })
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    //监听路由菜单
     $route: {
       handler(route) {
         if (route) {
-          console.log(route)
           this.activeIndex = route.fullPath
           if (this.tabList.findIndex(item => item.path === route.fullPath) === -1) {
             if (route.meta.title) {
@@ -156,7 +165,6 @@ export default defineComponent({
             }
           }
           this.activeName = route.fullPath
-          // this.$forceUpdate()
         }
       },
       deep: true,
@@ -182,7 +190,7 @@ export default defineComponent({
     //选中菜单
     selectMenu(index, path) {
       // console.log(index, path)
-      this.$router.push(index)
+      // this.$router.push(index)
     },
     //tab点击
     handleClick(tab) {
@@ -202,8 +210,10 @@ export default defineComponent({
     handleCommand(item) {
       if (item === 'refresh') {
         this.isRouterActive = false
-        this.$nextTick(function () {
-          this.isRouterActive = true
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.isRouterActive = true
+          }, 0)
         })
       } else if (item === 'all') {
         this.tabList = []
@@ -224,6 +234,9 @@ export default defineComponent({
   /deep/.el-menu-item.is-active {
     background-color: #ecf5ff;
   }
+}
+/deep/.el-aside {
+  overflow-x: hidden;
 }
 /deep/.el-tabs__header {
   margin: 0;
