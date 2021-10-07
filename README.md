@@ -1,8 +1,9 @@
 # tpl-hr-vue
 
-# vue 开发项目模板- 基于vue2.0 + element UI 
+# vue 可视化大屏开发项目模板- 大屏数据展示组件库使用@jiaminghi/data-view，图表使用echarts
 
-# 内容包括： table、自定义换肤、路由守卫、菜单递归
+# @jiaminghi/data-view手册：http://datav.jiaminghi.com/
+
 
 ```
 tpl-hr-vue
@@ -22,20 +23,19 @@ tpl-hr-vue
 │  ├─ App.vue
 │  ├─ assets
 │  │  ├─ css
+│  │  │  ├─ init.css
+│  │  │  ├─ scroll.css
+│  │  │  └─ scroll.scss
 │  │  ├─ imgs
 │  │  └─ svg
 │  ├─ components
-│  │  ├─ echartCommon
-│  │  ├─ eTable
+│  │  ├─ echartCommon ----------------------> echarts图标统一入口
 │  │  ├─ index.js
-│  │  ├─ Layout
 │  │  ├─ Loading
 │  │  ├─ NotData
-│  │  ├─ NotFound
-│  │  ├─ SideMenu
-│  │  └─ ThemePicker
+│  │  └─ NotFound
 │  ├─ directives
-│  │  ├─ auto-scale
+│  │  ├─ auto-scale ------------------------> 大屏可视化缩放指令
 │  │  ├─ drag
 │  │  ├─ index.js
 │  │  └─ water-marker
@@ -45,9 +45,6 @@ tpl-hr-vue
 │  │     └─ index.js
 │  ├─ main.js
 │  ├─ mock
-│  │  ├─ index.json
-│  │  └─ menu
-│  │     └─ menu.json
 │  ├─ permission.js
 │  ├─ router
 │  │  └─ index.js
@@ -62,54 +59,21 @@ tpl-hr-vue
 │  │  ├─ doAnimation.js
 │  │  └─ index.js
 │  └─ views
-│     ├─ home
-│     │  ├─ children
-│     │  │  └─ home
-│     │  │     ├─ api.js
-│     │  │     ├─ index.vue
-│     │  │     ├─ router.js
-│     │  │     └─ store.js
-│     │  ├─ index.js
-│     │  ├─ router.js
-│     │  └─ store.js
 │     ├─ index.js
-│     ├─ login
-│     │  └─ index.vue
-│     ├─ module1
-│     │  ├─ children
-│     │  │  ├─ menu1
-│     │  │  │  ├─ router.js
-│     │  │  │  ├─ store.js
-│     │  │  │  └─ views
-│     │  │  │     ├─ api.js
-│     │  │  │     ├─ columns.js
-│     │  │  │     └─ index.vue
-│     │  │  └─ menu2
-│     │  │     ├─ router.js
-│     │  │     ├─ store.js
-│     │  │     └─ views
-│     │  │        ├─ api.js
-│     │  │        └─ index.vue
-│     │  ├─ index.js
-│     │  ├─ router.js
-│     │  └─ store.js
-│     └─ module2
+│     └─ screen
 │        ├─ children
-│        │  ├─ menu1
-│        │  │  ├─ router.js
-│        │  │  ├─ store.js
-│        │  │  └─ views
-│        │  │     ├─ api.js
-│        │  │     ├─ columns.js
-│        │  │     └─ index.vue
-│        │  └─ menu2
-│        │     ├─ router.js
-│        │     ├─ store.js
-│        │     └─ views
-│        │        ├─ api.js
-│        │        └─ index.vue
+│        │  └─ home --------------------------> 大屏一
+│        │     ├─ api.js
+│        │     ├─ cell
+│        │     │  ├─ center-screen -----------> 中间部分
+│        │     │  │  └─ index.vue 
+│        │     │  ├─ left-screen -------------> 左边部分
+│        │     │  │  └─ index.vue
+│        │     │  └─ right-screen ------------> 右边部分
+│        │     │     └─ index.vue
+│        │     └─ index.vue ------------------> 大屏主页
 │        ├─ index.js
-│        ├─ router.js
+│        ├─ router.js ------------------------> 大屏集合路由
 │        └─ store.js
 └─ vue.config.js
 

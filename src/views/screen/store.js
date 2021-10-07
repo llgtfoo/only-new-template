@@ -1,4 +1,4 @@
-import { test } from './api.js'
+import { test } from './children/home/api.js'
 
 const state = {
   home: 'home测试',
@@ -26,11 +26,12 @@ const getters = {
     return state
   },
 }
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations,
+export default () => {
+  return {
+    namespaced: true,
+    state,
+    getters,
+    actions,
+    mutations,
+  }
 }

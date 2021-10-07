@@ -9,13 +9,7 @@ export default (Vue, router, store) => {
         [{
                 path: '/',
                 name: 'root',
-                redirect: '/login',
-            },
-            {
-                path: '/login',
-                name: 'login',
-                component: () =>
-                    import('./login/index.vue'),
+                redirect: '/home',
             },
             {
                 path: '/404', // 此处需特别注意至于最底部

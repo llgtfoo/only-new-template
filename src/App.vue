@@ -1,8 +1,10 @@
 <template>
-  <div class="wrapper">
-    <keep-alive :include="['Layout', 'SideMenu']">
-      <router-view></router-view>
-    </keep-alive>
+  <div class="wrapper" v-auto-scale="{ width: 1920, height: 1080 }">
+    <div class="screen-body">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
   </div>
 </template>
 
@@ -20,9 +22,9 @@ export default {
 
 <style lang="scss">
 .wrapper {
-  height: 100%;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-color: #020308;
   overflow: hidden;
-  position: relative;
 }
 </style>

@@ -2,10 +2,9 @@ import '@/assets/css/init.css' //默认css
 import '@/assets/css/scroll.scss' //默认css
 import '@/lib/http/axios' //axios
 import { http } from '@/lib/http/index' //封装后的axios
-import echarts from 'echarts'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-//ui框架
+import * as echarts from 'echarts'
+import dataV from '@jiaminghi/data-view'
+
 import Vue from 'vue'
 // 设置cookie
 import VueCookies from 'vue-cookies'
@@ -20,9 +19,8 @@ import store from './store'
 import utils from './utils/index'
 import views from './views/index'
 
-Vue.use(ElementUI)
+Vue.use(dataV)//大屏数据展示组件库
 Vue.use(VueCookies)
-
 Vue.use(components) //全局组件
 Vue.use(directives) //全局指令
 Vue.use(utils) //全局工具函数
