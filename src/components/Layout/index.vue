@@ -25,6 +25,14 @@
           {{ item.cname }}
         </el-menu-item>
       </el-menu>
+      <div class="system-time">
+        <date-time v-slot:default="slotProps">
+          {{ slotProps.data.year }}年 {{ slotProps.data.month }}月
+          {{ slotProps.data.day }}日&nbsp;&nbsp;&nbsp;
+          {{ slotProps.data.week }}&nbsp;&nbsp;&nbsp;
+          {{ slotProps.data.time }}
+        </date-time>
+      </div>
       <div class="user-info">
         <el-dropdown @command="handleCommand">
           <el-avatar
@@ -144,6 +152,18 @@ export default {
 }
 .iconfont {
   margin-right: 5px;
+}
+.system-time {
+  color: #fff;
+  margin-left: auto;
+  padding-right: 60px;
+  font-size: 20px;
+  font-weight: bolder;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  line-height: 100%;
+  background: #409eff !important;
 }
 .user-info {
   width: 150px;
