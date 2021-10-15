@@ -2,7 +2,7 @@
  * @Description:  系统导航栏
  * @Author: llgtfoo
  * @Date: 2021-09-28 16:30:26
- * @LastEditTime: 2021-09-29 08:44:24
+ * @LastEditTime: 2021-10-15 09:16:56
  * @LastEditors: llgtfoo
  * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
 -->
@@ -27,6 +27,14 @@
           {{ item.cname }}
         </el-menu-item>
       </el-menu>
+      <div class="system-time">
+        <date-time v-slot:default="slotProps">
+          {{ slotProps.data.year }}年 {{ slotProps.data.month }}月
+          {{ slotProps.data.day }}日&nbsp;&nbsp;&nbsp;
+          {{ slotProps.data.week }}&nbsp;&nbsp;&nbsp;
+          {{ slotProps.data.time }}
+        </date-time>
+      </div>
       <div class="user-info">
         <el-dropdown @command="handleCommand" placement="bottom-start">
           <el-avatar
@@ -151,6 +159,18 @@ export default defineComponent({
 }
 .iconfont {
   margin-right: 5px;
+}
+.system-time {
+  color: #fff;
+  margin-left: auto;
+  padding-right: 60px;
+  font-size: 20px;
+  font-weight: bolder;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  line-height: 100%;
+  background: #409eff !important;
 }
 .user-info {
   width: 150px;

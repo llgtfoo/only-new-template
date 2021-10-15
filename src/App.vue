@@ -30,6 +30,7 @@ export default defineComponent({
   width: 100%;
   overflow: hidden;
   position: relative;
+  min-width: 1000px;
 }
 </style>
 

@@ -71,4 +71,12 @@ export default defineComponent({
 </script>
 
 <style scoped lang='scss'>
+.llgtfoo-date {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-wrap: nowrap;
+  line-height: 100%;
+  width: max-content;
+}
 </style>
