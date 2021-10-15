@@ -7,6 +7,7 @@
     <slot :data="data"></slot>
   </div>
 </template>
+
 <script>
 export default {
   name: 'DateTime',
