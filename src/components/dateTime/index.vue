@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     setNowTimes() {
+
       const myDate = new Date()
       const wk = myDate.getDay()
       const yy = String(myDate.getFullYear())
