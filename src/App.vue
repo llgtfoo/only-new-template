@@ -24,5 +24,7 @@ export default {
   width: 100%;
   overflow: hidden;
   position: relative;
+
+  min-width: 1000px;
 }
 </style>
