@@ -1,4 +1,4 @@
-import http from '@/http/index'
+import http from 'http/index'
 // 定义action type
 export const LOGIN = 'LOGIN'
 // 指定对应api

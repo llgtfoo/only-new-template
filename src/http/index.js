@@ -2,6 +2,7 @@
  * @name: 二次封装post和get方法，统一传参方式{}
  * @param {type}
  */
+
 const http = {
   async post(url, data) {
     const options = {

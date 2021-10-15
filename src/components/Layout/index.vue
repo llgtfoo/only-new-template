@@ -2,7 +2,7 @@
  * @Description:  系统导航栏
  * @Author: llgtfoo
  * @Date: 2021-09-28 16:30:26
- * @LastEditTime: 2021-10-15 09:16:56
+ * @LastEditTime: 2021-10-15 12:09:52
  * @LastEditors: llgtfoo
  * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
 -->
@@ -122,7 +122,7 @@ export default defineComponent({
   padding: 0;
   align-items: center;
   .el-menu {
-    width: calc(100% - 400px);
+    width: calc(100% - 800px);
   }
 }
 .logo {
