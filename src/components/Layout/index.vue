@@ -112,6 +112,7 @@ export default {
   width: 100%;
   padding: 0;
   align-items: center;
+  background: #409eff !important;
   .el-menu {
     width: calc(100% - 800px);
   }

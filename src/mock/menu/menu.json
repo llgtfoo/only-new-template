@@ -1,4 +1,5 @@
-[{
+[
+    {
         "cname": "首页",
         "cnameKey": "/home",
         "normalUrl": "/home",
@@ -9,29 +10,34 @@
         "cnameKey": "/module1",
         "normalUrl": "/module1",
         "icon": "",
-        "children": [{
+        "children": [
+            {
                 "cname": "实有人口",
                 "cnameKey": "/module1/menu1",
                 "normalUrl": "/module1/menu1",
                 "icon": "icon-data",
-                "children": [{
-                    "cname": "菜单一",
-                    "cnameKey": "/module1/menu1/moduleMenu1",
-                    "normalUrl": "/module1/menu1/moduleMenu1",
-                    "icon": "icon-integral-fill1"
-                }]
+                "children": [
+                    {
+                        "cname": "菜单一",
+                        "cnameKey": "/module1/menu1/moduleMenu1",
+                        "normalUrl": "/module1/menu1/moduleMenu1",
+                        "icon": "icon-integral-fill1"
+                    }
+                ]
             },
             {
                 "cname": "实有房屋",
                 "cnameKey": "/module1/menu2",
                 "normalUrl": "/module1/menu2",
                 "icon": "icon-column",
-                "children": [{
-                    "cname": "菜单一",
-                    "cnameKey": "/module1/menu2/moduleMenu1",
-                    "normalUrl": "/module1/menu2/moduleMenu1",
-                    "icon": "icon-product1"
-                }]
+                "children": [
+                    {
+                        "cname": "菜单一",
+                        "cnameKey": "/module1/menu2/moduleMenu1",
+                        "normalUrl": "/module1/menu2/moduleMenu1",
+                        "icon": "icon-product1"
+                    }
+                ]
             },
             {
                 "cname": "实有房屋",
