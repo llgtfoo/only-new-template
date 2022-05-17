@@ -2,7 +2,7 @@
  * @Description:  系统导航栏
  * @Author: llgtfoo
  * @Date: 2021-09-28 16:30:26
- * @LastEditTime: 2021-10-15 12:09:52
+ * @LastEditTime: 2022-05-17 16:08:15
  * @LastEditors: llgtfoo
  * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
 -->
@@ -163,7 +163,7 @@ export default defineComponent({
 .system-time {
   color: #fff;
   margin-left: auto;
-  padding-right: 60px;
+  padding-right: 70px;
   font-size: 20px;
   font-weight: bolder;
   height: 100%;
