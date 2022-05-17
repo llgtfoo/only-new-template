@@ -2,7 +2,7 @@ export default () => ([
   {
     path: '/module1/menu2',
     name: '/module1/menu2',
-    component: () => import('@/components/SideMenu/index.vue'),
+    component: () => import('./views/index.vue'),
     redirect: '/module1/menu2/index1',
     meta: {
       title: '子菜单二',

@@ -2,7 +2,7 @@
  * @Description:  系统导航栏
  * @Author: llgtfoo
  * @Date: 2021-09-28 16:30:26
- * @LastEditTime: 2022-05-17 16:08:15
+ * @LastEditTime: 2022-05-17 16:29:18
  * @LastEditors: llgtfoo
  * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
 -->
@@ -10,7 +10,7 @@
   <el-container style="height: 100vh">
     <el-header class="el-header">
       <div class="logo">系统名称</div>
-      <el-menu
+      <!-- <el-menu
         :default-active="activeIndex"
         class="el-menu"
         mode="horizontal"
@@ -26,7 +26,7 @@
         >
           {{ item.cname }}
         </el-menu-item>
-      </el-menu>
+      </el-menu> -->
       <div class="system-time">
         <date-time v-slot:default="slotProps">
           {{ slotProps.data.year }}年 {{ slotProps.data.month }}月
@@ -65,7 +65,8 @@
         content: '系统名称',
       }"
     >
-      <router-view></router-view>
+      <!-- <router-view></router-view> -->
+      <side-menu></side-menu>
     </div>
   </el-container>
 </template>
@@ -74,9 +75,13 @@
 import menusJson from 'mock/menus/index.json'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import SideMenu from '../SideMenu'
 import { defineComponent, reactive, ref, toRefs, watch, watchEffect, computed, onMounted } from 'vue'
 export default defineComponent({
   name: 'Layout',
+  components: {
+    SideMenu
+  },
   setup() {
     const route = useRoute()
     const router = useRouter()
@@ -120,6 +125,7 @@ export default defineComponent({
   display: flex;
   width: 100%;
   padding: 0;
+  background: #409eff;
   align-items: center;
   .el-menu {
     width: calc(100% - 800px);

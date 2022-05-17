@@ -112,6 +112,7 @@ const SubMenu = {
   },
   components: { SubMenu },
 }
+import menusJson from 'mock/menus/index.json'
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'SideMenu',
@@ -129,28 +130,28 @@ export default defineComponent({
     }
   },
   computed: {
-    //获取二级菜单
-    smenus() {
-      return this.$store.getters['common/user/getCurrentMenu'] &&
-        this.$store.getters['common/user/getCurrentMenu']['children']
-    },
+    //   //获取二级菜单
+    //   smenus() {
+    //     return this.$store.getters['common/user/getCurrentMenu'] &&
+    //       this.$store.getters['common/user/getCurrentMenu']['children']
+    //   },
   },
   watch: {
     //为了重新渲染菜单
-    smenus: {
-      handler(route) {
-        if (route) {
-          this.menus = []
-          this.$nextTick(() => {
-            if (route.length > 0) {
-              this.menus = route
-            }
-          })
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
+    // smenus: {
+    //   handler(route) {
+    //     if (route) {
+    //       this.menus = []
+    //       this.$nextTick(() => {
+    //         if (route.length > 0) {
+    //           // this.menus = menusJson
+    //         }
+    //       })
+    //     }
+    //   },
+    //   deep: true,
+    //   immediate: true,
+    // },
     //监听路由菜单
     $route: {
       handler(route) {
@@ -184,6 +185,7 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.menus = menusJson
     this.activeIndex = this.$route.fullPath
   },
   methods: {
