@@ -9,6 +9,7 @@
         "build": "vue-cli-service build"
     },
     "dependencies": {
+        "@babel/runtime": "^7.17.9",
         "axios": "^0.18.1",
         "core-js": "^3.6.5",
         "echarts": "^4.7.0",
