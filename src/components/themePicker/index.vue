@@ -3,7 +3,7 @@
   <el-color-picker
     v-model="theme"
     class="theme-picker"
-    size="mini"
+    size="small"
     popper-class="theme-picker-dropdown"
   />
   <!-- </el-tooltip> -->

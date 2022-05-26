@@ -19,25 +19,36 @@
           label-width="50px"
           class="login-ruleForm"
           label-position="top"
+          size="large"
           @keyup.enter.native="submitForm()"
         >
-          <el-form-item label="密码" prop="username">
+          <el-form-item label="用户名" prop="username">
             <el-input
               type="text"
               v-model="ruleForm.username"
               autocomplete="off"
               placeholder="请输入用户名"
-              prefix-icon="el-icon-user"
-            ></el-input>
+            >
+              <template #prefix>
+                <el-icon class="el-input__icon" style="color: #fff"
+                  ><User
+                /></el-icon>
+              </template>
+            </el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="password">
+          <el-form-item label="密码" prop="password">
             <el-input
               type="password"
               v-model="ruleForm.password"
               autocomplete="off"
               placeholder="请输入密码"
-              prefix-icon="el-icon-shopping-bag-2"
-            ></el-input>
+            >
+              <template #prefix>
+                <el-icon class="el-input__icon" style="color: #fff"
+                  ><Key
+                /></el-icon>
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
             <el-checkbox
@@ -49,7 +60,12 @@
             </el-checkbox>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" style="width: 100%" @click="submitForm()">
+            <el-button
+              type="primary"
+              style="width: 100%"
+              size="large"
+              @click="submitForm()"
+            >
               登录
             </el-button>
           </el-form-item>
@@ -189,15 +205,17 @@ export default {
       }
     }
   }
-  /deep/.el-form-item__label {
+  :deep(.el-form-item__label) {
     color: #fff;
     font-size: 16px;
     padding: 0;
+    margin-bottom: 0px !important;
   }
-  /deep/.el-checkbox__label {
+  :deep(.el-checkbox__label) {
     color: #fff;
   }
-  /deep/.el-input__inner {
+  :deep(.el-input__inner),
+  :deep(.el-input__wrapper) {
     background: transparent;
     color: #fff;
   }
