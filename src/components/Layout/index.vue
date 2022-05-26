@@ -2,7 +2,7 @@
  * @Description:  系统导航栏
  * @Author: llgtfoo
  * @Date: 2021-09-28 16:30:26
- * @LastEditTime: 2022-05-17 16:08:15
+ * @LastEditTime: 2022-05-26 11:23:23
  * @LastEditors: llgtfoo
  * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
 -->
@@ -139,6 +139,7 @@ export default defineComponent({
   /deep/.el-menu--horizontal,
   /deep/.el-menu-item {
     background: #409eff !important;
+    height: 100%;
   }
 }
 .el-menu--horizontal > .el-menu-item.is-active {

@@ -12,7 +12,10 @@ const store = createStore({
   modules: {
     common,
   },
-  plugins: [createPersistedState({ paths: ['common'] })],
+  plugins: [createPersistedState({
+    // storage: window.sessionStorage,//用sessionStorage代替localStorage
+    paths: ['common']
+  })],
 })
 console.log(store, 'store')
 export default store

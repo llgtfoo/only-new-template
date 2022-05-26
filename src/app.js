@@ -5,7 +5,7 @@ import '@/icons/index' //svg图标
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'//ui库
 import locale from 'element-plus/lib/locale/lang/zh-cn' //中文
-
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import * as echarts from 'echarts' //百度echarts图表
 import { createApp } from 'vue'
 import { sync } from 'vuex-router-sync'
@@ -30,7 +30,9 @@ const app = createApp(App)
   .use(directives)
   .use(utils)
   .use(ElementPlus, { locale })
-
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
 //全局挂载
 app.config.globalProperties.$http = http
 app.config.globalProperties.$echarts = echarts

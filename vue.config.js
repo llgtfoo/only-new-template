@@ -33,6 +33,21 @@ module.exports = {
     },
   },
   chainWebpack(config) {
+    config.plugin("html").tap(args => {
+      args[0].title = "系统title名称"
+      return args
+    })
+    config.optimization.minimizer('js').use(require.resolve('terser-webpack-plugin'), [{
+      terserOptions: {
+        // 打包删掉注释
+        comments: true,
+        compress: {
+          warnings: false,
+          drop_console: true,
+          drop_debugger: true
+        }
+      }
+    }])
     config.resolve.alias.set('vue$', 'vue/dist/vue.esm-bundler.js')
     // console.log(config)
     //去除默认配置处理的svg文件

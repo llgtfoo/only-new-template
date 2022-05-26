@@ -15,10 +15,15 @@
     @selection-change="selectionChange"
   >
     <template v-slot:operation="{ data }">
-      <el-button @click.prevent="handleClick(data)" type="text" size="small">
+      <el-button
+        @click.prevent="handleClick(data)"
+        type="primary"
+        text
+        size="small"
+      >
         查看
       </el-button>
-      <el-button type="text" size="small"> 编辑 </el-button>
+      <el-button type="primary" text size="small"> 编辑 </el-button>
     </template>
     <template v-slot:name1="{ data }">
       <el-tag type="success">{{ data.row.name }}</el-tag>
