@@ -1,10 +1,10 @@
 <!--
- * @Description: el-table封装
+ * @Description:element-plus el-table封装
  * @Author: llgtfoo
  * @Date: 2021-09-29 08:51:41
- * @LastEditTime: 2021-09-29 09:07:58
+ * @LastEditTime: 2022-06-19 12:58:13
  * @LastEditors: llgtfoo
- * @FilePath: \tpl-hr-vue\src\components\eTable\index.vue
+ * @FilePath: \new-eam-web\src\components\eTable\index.vue
 -->
 <template>
   <div>
@@ -12,6 +12,7 @@
       v-loading="isloading"
       ref="elTable"
       :data="data"
+      :scrollbar-always-on="true"
       :row-key="rowKey"
       :height="height"
       :max-height="maxHeight"
@@ -39,6 +40,8 @@
           :prop="item.prop"
           :label="item.label"
           :width="item.width ? item.width : ''"
+          :min-width="item.minWidth ? item.minWidth : 'auto'"
+          :show-overflow-tooltip="item.show ? item.show : false"
         >
           <template #default="scope">
             <slot :name="item.slot" :data="scope" />
@@ -46,15 +49,23 @@
         </el-table-column>
         <el-table-column
           v-else
-          :key="item.prop"
+          :key="index"
           :align="item.align ? item.align : 'left'"
           :type="item.type ? item.type : ''"
           :fixed="item.fixed ? item.fixed : false"
           :prop="item.prop"
           :label="item.label"
           :width="item.width ? item.width : ''"
+          :min-width="item.minWidth ? item.minWidth : 'auto'"
+          :show-overflow-tooltip="item.show ? item.show : false"
         >
         </el-table-column>
+      </template>
+      <!-- 暂无数据 -->
+      <template #empty>
+        <div class="flex items-center justify-center h-100%">
+          <el-empty />
+        </div>
       </template>
     </el-table>
     <el-pagination
@@ -65,6 +76,7 @@
       :current-page="currentPage"
       :page-sizes="pageSizeArray"
       background
+      :small="small"
       prev-text="上一页"
       next-text="下一页"
       :page-size="pageSize"
@@ -74,15 +86,21 @@
     </el-pagination>
   </div>
 </template>
- <!--  -->
+<!--  -->
 <script>
-export default {
-  name: 'ETable',
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "OnlyTable",
   props: {
+    //分页大小
+    small: {
+      type: Boolean,
+      default: true,
+    },
     //页条数
     pageSizeArray: {
       type: Array,
-      default: () => ([10, 20, 30, 40]),
+      default: () => [10, 20, 30, 50],
     },
     //Table 目前的展开行
     expandRows: {
@@ -91,6 +109,7 @@ export default {
     //绑定的行数据的 Key
     rowKey: {
       type: String,
+      default: "string",
     },
     //表格高度
     height: {
@@ -104,7 +123,7 @@ export default {
     //分页功能排序
     layout: {
       type: String,
-      default: 'total, sizes, prev, pager, next, jumper',
+      default: "total, sizes, prev, pager, next, jumper",
     },
     //表格最大高度
     maxHeight: {
@@ -134,16 +153,20 @@ export default {
     headerCellStyle: {
       type: Object,
       default: () => ({
-        // padding: 0,
-        'background-color': '#F5F6FA',
+        "background-color": "#E8EBF8",
+        "font-weight": "bolder",
+        color: "#000",
+        height: "50px",
+        "box-sizing": "border-box",
+        padding: "0",
       }),
     },
     //行的 style 的回调方法
     rowStyle: {
       type: Object,
       default: () => ({
-        height: '50px',
-        'line-height': '50px',
+        height: "38px",
+        "line-height": "38px",
       }),
     },
     // 单元格的 style
@@ -156,12 +179,12 @@ export default {
     //是否要高亮当前行
     highlightCurrentRow: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     // 是否为斑马纹 table
     stripe: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     // 是否带有纵向边框
     border: {
@@ -185,55 +208,71 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
-  mounted() { },
+  mounted() {},
   methods: {
     //页条数
     sizeChangeHandle(number) {
-      this.$emit('size-change', number)
+      this.$emit("size-change", number);
     },
     //页码
     currentChangeHandle(page) {
-      this.$emit('current-change', page)
+      this.$emit("current-change", page);
     },
     // el-table dom
     tableRef() {
-      return this.$refs.elTable
+      return this.$refs.elTable;
     },
-    // 默认选中项
+    // 多选框选中和清除
     toggleSelection(rows) {
-      if (rows) {
+      if (rows && rows.length > 0) {
+        // this.$refs.elTable.clearSelection()
         rows.forEach((row) => {
-          this.$refs.elTable.toggleRowSelection(row)
-        })
+          this.$refs.elTable.toggleRowSelection(row, true);
+        });
       } else {
-        this.$refs.elTable.clearSelection()
+        this.$refs.elTable.clearSelection();
       }
     },
     // z展开回调
     expandChange(row, expandedRows) {
-      this.$emit('expand-change', row, expandedRows)
+      this.$emit("expand-change", row, expandedRows);
     },
     // 当选择项发生变化时会触发该事件
     selectionChange(selection) {
-      this.$emit('selection-change', selection)
+      this.$emit("selection-change", selection);
     },
     // 当某个单元格被点击时会触发该事件
     rowClick(row, column, event) {
-      this.$emit('row-click', { row, column, event })
+      this.$emit("row-click", { row, column, event });
     },
     // 当某个单元格被点击时会触发该事件
     cellClick(row, column, cell, event) {
-      this.$emit('cell-click', { row, column, cell, event })
+      this.$emit("cell-click", { row, column, cell, event });
     },
   },
-}
+});
 </script>
-
 <style lang="scss" scoped>
-.pagination-define {
-  text-align: center;
+.el-pagination {
+  display: flex;
+  justify-content: flex-start;
   margin-top: 10px;
+}
+.el-table {
+  --el-table-current-row-bg-color: var(--el-color-primary-light-8);
+}
+/deep/.el-table__body tr.hover-row {
+  background: var(--el-color-primary-light-8);
+}
+/deep/.el-table__body tr.hover-row > td.el-table__cell {
+  background: var(--el-color-primary-light-8);
+}
+.el-table--enable-row-hover /deep/.el-table__body /deep/tr:hover > td.el-table__cell {
+  background: var(--el-color-primary-light-8);
+}
+.el-table--enable-row-hover /deep/.el-table__body tr:hover {
+  background: var(--el-color-primary-light-8);
 }
 </style>

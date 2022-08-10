@@ -63,13 +63,11 @@
         </el-tabs>
         <div class="breadcrumb-tool">
           <el-dropdown @command="handleCommand" placement="bottom-end">
-            <i class="el-icon-arrow-down" style="fontsize: 18px"></i>
+            <el-icon><ArrowDown /></el-icon>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item command="all"> 关闭全部 </el-dropdown-item>
-                <el-dropdown-item command="refresh">
-                  刷新当前页
-                </el-dropdown-item>
+                <el-dropdown-item command="refresh"> 刷新当前页 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -103,7 +101,7 @@ const SubMenu = {
         </template>
     </template>
     </el-sub-menu>`,
-  name: 'SubMenu',
+  name: "SubMenu",
   props: {
     menuInfo: {
       type: Object,
@@ -111,23 +109,23 @@ const SubMenu = {
     },
   },
   components: { SubMenu },
-}
-import menusJson from 'mock/menus/index.json'
-import { defineComponent } from 'vue'
+};
+import menusJson from "mock/menus/index.json";
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'SideMenu',
+  name: "SideMenu",
   components: { SubMenu },
   data() {
     return {
-      activeName: '',
+      activeName: "",
       isCollapse: false,
-      activeIndex: '', //选中菜单项
+      activeIndex: "", //选中菜单项
       defaultOpeneds: [], //默认打开
       tabList: [], //打开的菜单集合
       isRouterActive: true,
       closable: true,
       menus: [],
-    }
+    };
   },
   computed: {
     //   //获取二级菜单
@@ -156,16 +154,16 @@ export default defineComponent({
     $route: {
       handler(route) {
         if (route) {
-          this.activeIndex = route.fullPath
-          if (this.tabList.findIndex(item => item.path === route.fullPath) === -1) {
+          this.activeIndex = route.fullPath;
+          if (this.tabList.findIndex((item) => item.path === route.fullPath) === -1) {
             if (route.meta.title) {
               this.tabList.push({
                 name: route.meta.title,
                 path: route.fullPath,
-              })
+              });
             }
           }
-          this.activeName = route.fullPath
+          this.activeName = route.fullPath;
         }
       },
       deep: true,
@@ -175,9 +173,9 @@ export default defineComponent({
     tabList: {
       handler(newVal) {
         if (newVal.length === 1) {
-          this.closable = false
+          this.closable = false;
         } else {
-          this.closable = true
+          this.closable = true;
         }
       },
       deep: true,
@@ -185,8 +183,8 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.menus = menusJson
-    this.activeIndex = this.$route.fullPath
+    this.menus = menusJson;
+    this.activeIndex = this.$route.fullPath;
   },
   methods: {
     //选中菜单
@@ -196,38 +194,38 @@ export default defineComponent({
     },
     //tab点击
     handleClick(tab) {
-      this.$router.push(tab.props.name)
+      this.$router.push(tab.props.name);
     },
     //tab关闭
     removeTab(tab) {
-      const index = this.tabList.findIndex(v => v.path === tab)
+      const index = this.tabList.findIndex((v) => v.path === tab);
       if (index !== -1) {
-        this.tabList.splice(index, 1)
+        this.tabList.splice(index, 1);
       }
       if (tab === this.$route.fullPath) {
-        this.$router.push(this.tabList[this.tabList.length - 1].path)
+        this.$router.push(this.tabList[this.tabList.length - 1].path);
       }
     },
     //工具栏
     handleCommand(item) {
-      if (item === 'refresh') {
-        this.isRouterActive = false
+      if (item === "refresh") {
+        this.isRouterActive = false;
         this.$nextTick(() => {
           setTimeout(() => {
-            this.isRouterActive = true
-          }, 0)
-        })
-      } else if (item === 'all') {
-        this.tabList = []
+            this.isRouterActive = true;
+          }, 0);
+        });
+      } else if (item === "all") {
+        this.tabList = [];
         this.tabList.push({
           name: this.$route.meta.title,
           path: this.$route.fullPath,
-        })
-        this.activeName = this.$route.fullPath
+        });
+        this.activeName = this.$route.fullPath;
       }
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

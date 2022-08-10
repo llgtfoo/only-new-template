@@ -1,4 +1,5 @@
 const path = require('path')
+const FileManagerPlugin = require('filemanager-webpack-plugin')
 const resolve = (dir) => path.join(__dirname, dir)
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
@@ -21,6 +22,7 @@ module.exports = {
   },
   //webpack配置---目录别名
   configureWebpack: {
+    devtool: process.env.NODE_ENV === 'production' ? 'source-map' : "cheap-module-source-map",
     resolve: {
       alias: {
         //配置文件路径别名
@@ -31,6 +33,19 @@ module.exports = {
         utils: path.join(__dirname, 'src/utils'), //工具函数
       },
     },
+    plugins: [
+      new FileManagerPlugin({
+        events: {
+          onEnd: {
+            delete: ['./zip/'],
+            archive: [{
+              source: path.join(__dirname, './dist'),
+              destination: path.join(__dirname, `./zip/dist-${Date.now()}.zip`)
+            }]
+          }
+        }
+      })
+    ]
   },
   chainWebpack(config) {
     config.plugin("html").tap(args => {
