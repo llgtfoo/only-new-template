@@ -1,0 +1,100 @@
+/*
+ * @Description: 系统水印
+ * @Author: llgtfoo
+ * @Date: 2021-09-28 16:30:26
+ * @LastEditTime: 2021-09-29 09:36:46
+ * @LastEditors: llgtfoo
+ * @FilePath: \tpl-hr-vue\src\directives\water-marker\index.js
+ */
+export default (Vue) => {
+  Vue.directive('water-marker', {
+    mounted: function (el, { value }) {
+      const canvas = document.createElement('canvas')
+      const {
+        width = '200px',
+        height = '150px',
+        textAlign = 'center',
+        textBaseline = 'middle',
+        font = '16px microsoft yahei',
+        fillStyle = 'rgba(184, 184, 184, 0.3)',
+        content = '可笑可笑',
+        rotate = '-30',
+        zIndex = 1000,
+        visible = true,
+      } = value || {}
+      canvas.setAttribute('width', width)
+      canvas.setAttribute('height', height)
+      const ctx = canvas.getContext('2d')
+
+      ctx.textAlign = textAlign
+      ctx.textBaseline = textBaseline
+      ctx.font = font
+      ctx.fillStyle = fillStyle
+      ctx.rotate(Math.PI / 180 * rotate)
+      const texts = content.split('\n')
+      texts.forEach((t, index) =>
+        ctx.fillText(t, parseFloat(width) / 2, parseFloat(height) / texts.length * (index + 1)))
+
+      const base64Url = canvas.toDataURL()
+      const watermarkDiv = document.createElement('div')
+      watermarkDiv.className = 'water-marker-div'
+      watermarkDiv.setAttribute('style', `
+        ${visible ? 'opacity: 1;' : 'opacity: 0;'}
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:${zIndex || 1000};
+        pointer-events:none;
+        background-repeat:repeat;
+        background-image:url('${base64Url}')`)
+
+      el.style.position = 'relative'
+      el.insertBefore(watermarkDiv, el.firstChild)
+    },
+    beforeUpdate(el, { value, oldValue }) {
+      const opt = Object.assign({
+        width: '200px',
+        height: '150px',
+        textAlign: 'center',
+        textBaseline: 'middle',
+        font: '16px microsoft yahei',
+        fillStyle: 'rgba(184, 184, 184, 0.4)',
+        content: '可笑可笑',
+        rotate: '-30',
+        zIndex: 1000,
+        visible: true,
+      }, oldValue, value)
+      const [watermarkDiv] = el.getElementsByClassName('water-marker-div')
+      const canvas = document.createElement('canvas')
+
+      canvas.setAttribute('width', opt.width)
+      canvas.setAttribute('height', opt.height)
+      const ctx = canvas.getContext('2d')
+
+      ctx.textAlign = opt.textAlign
+      ctx.textBaseline = opt.textBaseline
+      ctx.font = opt.font
+      ctx.fillStyle = opt.fillStyle
+      ctx.rotate(Math.PI / 180 * opt.rotate)
+      const texts = opt.content.split('\n')
+      texts.forEach((t, index) => {
+        ctx.fillText(t, 50, 60 + 20 * index)
+      })
+
+      const base64Url = canvas.toDataURL()
+      watermarkDiv.setAttribute('style', `
+        ${opt.visible ? 'opacity: 1;' : 'opacity: 0;'}
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:${opt.zIndex};
+        pointer-events:none;
+        background-repeat:repeat;
+        background-image:url('${base64Url}')`)
+    },
+  })
+}

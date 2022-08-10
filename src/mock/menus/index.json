@@ -1,0 +1,66 @@
+[
+    {
+        "cname": "首页",
+        "cnameKey": "/home",
+        "normalUrl": "/home",
+        "icon": ""
+    },
+    {
+        "cname": "模块一",
+        "cnameKey": "/module1",
+        "normalUrl": "/module1",
+        "icon": "icon-Moneymanagement-fill",
+        "children": [
+            {
+                "cname": "子菜单一",
+                "cnameKey": "/module1/menu1",
+                "normalUrl": "/module1/menu1",
+                "icon": "icon-Moneymanagement-fill",
+                "children": [
+                    {
+                        "cname": "页面一",
+                        "cnameKey": "/module1/menu1/index1",
+                        "normalUrl": "/module1/menu1/index1",
+                        "icon": "icon-Moneymanagement-fill"
+                    }
+                ]
+            },
+            {
+                "cname": "子菜单二",
+                "cnameKey": "/module1/menu2",
+                "normalUrl": "/module1/menu2",
+                "icon": "icon-office-supplies-fill",
+                "children": [
+                    {
+                        "cname": "页面二",
+                        "cnameKey": "/module1/menu2/index1",
+                        "normalUrl": "/module1/menu2/index1",
+                        "icon": "icon-Moneymanagement-fill"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "cname": "模块二",
+        "cnameKey": "/module2",
+        "normalUrl": "/module2",
+        "icon": "icon-Moneymanagement-fill",
+        "children": [
+            {
+                "cname": "子菜单一",
+                "cnameKey": "/module2/menu1",
+                "normalUrl": "/module2/menu1",
+                "icon": "icon-Moneymanagement-fill",
+                "children": [
+                    {
+                        "cname": "页面1",
+                        "cnameKey": "/module2/menu1/index1",
+                        "normalUrl": "/module2/menu1/index1",
+                        "icon": "icon-Moneymanagement-fill"
+                    }
+                ]
+            }
+        ]
+    }
+]
