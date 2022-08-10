@@ -1,17 +1,18 @@
 // import * as modules from './*/index.js'
 const importAll = (context) => {
   const map = {}
-  for (const key of context.keys()) {
+  for (const key of Object.keys(context)) {
     const keyArr = key.split('/')
     keyArr.shift() // 移除.
-    map[keyArr.join('.').replace(/index.js/g, '')]
-      = context(key) && context(key).default
+    if (keyArr[0]) {
+      map[keyArr[0]] =
+        context[key] && context[key].default
+    }
   }
   return map
 }
-const req = import.meta.globEager('./*/index.js') //读文件
+const req = import.meta.globEager('./*/index.ts') //读文件
 const modules = importAll(req)
-
 const initRoute = [
   {
     path: '/',

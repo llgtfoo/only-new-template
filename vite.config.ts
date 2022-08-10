@@ -4,7 +4,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import path from 'path'
 import { defineConfig } from 'vite'
 export default defineConfig({
-  publicDir: process.env.NODE_ENV === 'production' ? './' : '/',
   css: {
     preprocessorOptions: {
       less: {
@@ -23,7 +22,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'vue': 'vue/dist/vue.esm-bundler.js', //编译template组件
-      '/@': path.resolve(__dirname, 'src'), //跟目录
+      '@': path.resolve(__dirname, 'src'), //跟目录
       comps: path.join(__dirname, 'src/components'), //组件
       dcts: path.join(__dirname, 'src/directives'), //指令
       http: path.join(__dirname, 'src/http'),

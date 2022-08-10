@@ -17,5 +17,5 @@ const store = createStore({
     paths: ['common']
   })],
 })
-console.log(store, 'store')
+console.log(store ,'store')
 export default store

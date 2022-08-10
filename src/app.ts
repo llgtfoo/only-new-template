@@ -1,7 +1,6 @@
-import '/@/assets/css/init.css' //全局默认css
-import '/@/assets/css/scroll.scss' //全局默认css
-import '/@/icons/index' //svg图标
-
+import '@/assets/css/init.css' //全局默认css
+import '@/assets/css/scroll.scss' //全局默认css
+import '@/assets/iocnFont/iconfont.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'//ui库
 import locale from 'element-plus/lib/locale/lang/zh-cn' //中文

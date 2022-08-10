@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import logo from '../../assets/svg/logo.svg'
+import logo from '@/assets/svg/logo.svg'
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -147,7 +147,8 @@ export default {
 .login-wraper {
   width: 100%;
   height: 100%;
-  background: url("../../assets/imgs/login.png") no-repeat;
+  background: url("@/assets/imgs/login.png") no-repeat;
+  background-size:100% 100%;
   .login-form {
     display: flex;
     width: 740px;
@@ -209,7 +210,7 @@ export default {
     color: #fff;
     font-size: 16px;
     padding: 0;
-    margin-bottom: 0px !important;
+    margin-bottom: 10px !important;
   }
   :deep(.el-checkbox__label) {
     color: #fff;
