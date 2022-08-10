@@ -9,14 +9,14 @@
 export const stockColumn = [{
     type: 'selection',
     width: '60px',
-    fixed: 'left',
+    // fixed: 'left',
     align: 'center',
 },
 {
     prop: 'name',
     label: '姓名',
     width: '120px',
-    fixed: 'left',
+    // fixed: 'left',
     align: 'center',
     slot: 'name1',
 },

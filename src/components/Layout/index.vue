@@ -2,7 +2,7 @@
  * @Description:  系统导航栏
  * @Author: llgtfoo
  * @Date: 2021-09-28 16:30:26
- * @LastEditTime: 2022-05-26 11:23:23
+ * @LastEditTime: 2022-08-10 09:24:17
  * @LastEditors: llgtfoo
  * @FilePath: \tpl-hr-vue\src\components\Layout\index.vue
 -->
@@ -71,20 +71,29 @@
 </template>
 
 <script>
-import menusJson from 'mock/menus/index.json'
-import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
-import { defineComponent, reactive, ref, toRefs, watch, watchEffect, computed, onMounted } from 'vue'
+import menusJson from "mock/menus/index.json"
+import { useRoute, useRouter } from "vue-router"
+import { useStore } from "vuex"
+import {
+  defineComponent,
+  reactive,
+  ref,
+  toRefs,
+  watch,
+  watchEffect,
+  computed,
+  onMounted,
+} from "vue"
 export default defineComponent({
-  name: 'Layout',
+  name: "Layout",
   setup() {
     const route = useRoute()
     const router = useRouter()
     const store = useStore()
     const state = reactive({
       menuList: menusJson,
-      activeIndex: '',
-      activeIndex2: '',
+      activeIndex: "",
+      activeIndex2: "",
     })
     //监听路由变化
     watchEffect(() => {
@@ -92,7 +101,7 @@ export default defineComponent({
       const menus = state.menuList.filter((ele) => {
         return ele.cnameKey === route.matched[0].path
       })
-      store.dispatch('common/user/doCurrentMenu', menus[0])
+      store.dispatch("common/user/doCurrentMenu", menus[0])
     })
     onMounted(() => {
       state.activeIndex = getSelectorMenu()
@@ -112,7 +121,7 @@ export default defineComponent({
     }
     return { ...toRefs(state), handleCommand, handleSelect }
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
@@ -120,7 +129,9 @@ export default defineComponent({
   display: flex;
   width: 100%;
   padding: 0;
+  height: 60px;
   align-items: center;
+  background: #409eff;
   .el-menu {
     width: calc(100% - 800px);
   }
@@ -136,10 +147,11 @@ export default defineComponent({
   font-size: 25px;
 }
 .el-header {
-  /deep/.el-menu--horizontal,
-  /deep/.el-menu-item {
+  :deep(.el-menu--horizontal),
+  :deep(.el-menu-item) {
     background: #409eff !important;
-    height: 100%;
+    height: 61px;
+    box-sizing: border-box;
   }
 }
 .el-menu--horizontal > .el-menu-item.is-active {

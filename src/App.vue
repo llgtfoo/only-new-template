@@ -32,6 +32,13 @@ export default defineComponent({
   position: relative;
   min-width: 1000px;
 }
+:deep(.el-button--primary:active) {
+  background: var(--el-button-bg-color);
+  border-color: var(--el-button-bg-color);
+}
+:deep(.el-dialog__footer) {
+  text-align: center;
+}
 </style>
 
 

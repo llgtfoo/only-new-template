@@ -63,13 +63,11 @@
         </el-tabs>
         <div class="breadcrumb-tool">
           <el-dropdown @command="handleCommand" placement="bottom-end">
-            <i class="el-icon-arrow-down" style="fontsize: 18px"></i>
+            <el-icon><ArrowDown /></el-icon>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item command="all"> 关闭全部 </el-dropdown-item>
-                <el-dropdown-item command="refresh">
-                  刷新当前页
-                </el-dropdown-item>
+                <el-dropdown-item command="refresh"> 刷新当前页 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -103,7 +101,7 @@ const SubMenu = {
         </template>
     </template>
     </el-sub-menu>`,
-  name: 'SubMenu',
+  name: "SubMenu",
   props: {
     menuInfo: {
       type: Object,
@@ -111,28 +109,30 @@ const SubMenu = {
     },
   },
   components: { SubMenu },
-}
-import { defineComponent } from 'vue'
+};
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'SideMenu',
+  name: "SideMenu",
   components: { SubMenu },
   data() {
     return {
-      activeName: '',
+      activeName: "",
       isCollapse: false,
-      activeIndex: '', //选中菜单项
+      activeIndex: "", //选中菜单项
       defaultOpeneds: [], //默认打开
       tabList: [], //打开的菜单集合
       isRouterActive: true,
       closable: true,
       menus: [],
-    }
+    };
   },
   computed: {
     //获取二级菜单
     smenus() {
-      return this.$store.getters['common/user/getCurrentMenu'] &&
-        this.$store.getters['common/user/getCurrentMenu']['children']
+      return (
+        this.$store.getters["common/user/getCurrentMenu"] &&
+        this.$store.getters["common/user/getCurrentMenu"]["children"]
+      );
     },
   },
   watch: {
@@ -140,12 +140,12 @@ export default defineComponent({
     smenus: {
       handler(route) {
         if (route) {
-          this.menus = []
+          this.menus = [];
           this.$nextTick(() => {
             if (route.length > 0) {
-              this.menus = route
+              this.menus = route;
             }
-          })
+          });
         }
       },
       deep: true,
@@ -155,16 +155,16 @@ export default defineComponent({
     $route: {
       handler(route) {
         if (route) {
-          this.activeIndex = route.fullPath
-          if (this.tabList.findIndex(item => item.path === route.fullPath) === -1) {
+          this.activeIndex = route.fullPath;
+          if (this.tabList.findIndex((item) => item.path === route.fullPath) === -1) {
             if (route.meta.title) {
               this.tabList.push({
                 name: route.meta.title,
                 path: route.fullPath,
-              })
+              });
             }
           }
-          this.activeName = route.fullPath
+          this.activeName = route.fullPath;
         }
       },
       deep: true,
@@ -174,9 +174,9 @@ export default defineComponent({
     tabList: {
       handler(newVal) {
         if (newVal.length === 1) {
-          this.closable = false
+          this.closable = false;
         } else {
-          this.closable = true
+          this.closable = true;
         }
       },
       deep: true,
@@ -184,7 +184,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.activeIndex = this.$route.fullPath
+    this.activeIndex = this.$route.fullPath;
   },
   methods: {
     //选中菜单
@@ -194,58 +194,58 @@ export default defineComponent({
     },
     //tab点击
     handleClick(tab) {
-      this.$router.push(tab.props.name)
+      this.$router.push(tab.props.name);
     },
     //tab关闭
     removeTab(tab) {
-      const index = this.tabList.findIndex(v => v.path === tab)
+      const index = this.tabList.findIndex((v) => v.path === tab);
       if (index !== -1) {
-        this.tabList.splice(index, 1)
+        this.tabList.splice(index, 1);
       }
       if (tab === this.$route.fullPath) {
-        this.$router.push(this.tabList[this.tabList.length - 1].path)
+        this.$router.push(this.tabList[this.tabList.length - 1].path);
       }
     },
     //工具栏
     handleCommand(item) {
-      if (item === 'refresh') {
-        this.isRouterActive = false
+      if (item === "refresh") {
+        this.isRouterActive = false;
         this.$nextTick(() => {
           setTimeout(() => {
-            this.isRouterActive = true
-          }, 0)
-        })
-      } else if (item === 'all') {
-        this.tabList = []
+            this.isRouterActive = true;
+          }, 0);
+        });
+      } else if (item === "all") {
+        this.tabList = [];
         this.tabList.push({
           name: this.$route.meta.title,
           path: this.$route.fullPath,
-        })
-        this.activeName = this.$route.fullPath
+        });
+        this.activeName = this.$route.fullPath;
       }
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
 .el-menu-vertical {
   height: calc(100% - 60px);
-  /deep/.el-menu-item.is-active {
+  :deep(.el-menu-item.is-active) {
     background-color: #ecf5ff;
   }
 }
-/deep/.el-aside {
+:deep(.el-aside) {
   overflow-x: hidden;
 }
-/deep/.el-tabs__header {
+:deep(.el-tabs__header) {
   margin: 0;
 }
-/deep/.el-tabs__nav-scroll {
+:deep(.el-tabs__nav-scroll) {
   padding: 0 10px;
 }
-/deep/.el-tabs__nav-next,
-/deep/.el-tabs__nav-prev {
+:deep(.el-tabs__nav-next),
+:deep(.el-tabs__nav-prev) {
   line-height: 40px;
   width: 20px;
   display: flex;
@@ -254,13 +254,13 @@ export default defineComponent({
   justify-content: center;
   background: #f8f9fa;
 }
-/deep/.el-dropdown {
+:deep(.el-dropdown) {
   font-size: 20px;
 }
 .breadcrumb {
   width: 100%;
   display: flex;
-  /deep/.el-tabs--top {
+  :deep(.el-tabs--top) {
     width: calc(100% - 40px);
     background: #fff;
   }
@@ -274,7 +274,7 @@ export default defineComponent({
     cursor: pointer;
   }
 }
-/deep/.iconfont {
+:deep(.iconfont) {
   margin-right: 5px;
   width: 24px;
   text-align: center;

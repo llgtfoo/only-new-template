@@ -5,12 +5,12 @@
 export const formatComponentName = (name) => {
   const firstIndex = 0
   const deleteCount = 1
-  if(!name){
+  if (!name) {
     console.error('存在未指定name的组件')
     return
-  }else{
-   const str = name.replace(/([A-Z])/g, "-$1").toLowerCase()
-   return str.indexOf("-") === firstIndex ? str.substr(deleteCount) : str
+  } else {
+    const str = name.replace(/([A-Z])/g, "-$1").toLowerCase()
+    return str.indexOf("-") === firstIndex ? str.substr(deleteCount) : str
   }
 
 }
@@ -33,10 +33,10 @@ export const time = (val = new Date(), format = "yy-mm-dd h:m:s") => {
     date = new Date()
   }
   const y = date.getFullYear()
-  const m= date.getMonth() + 1
+  const m = date.getMonth() + 1
   const d = date.getDate()
   const H = date.getHours()
-  const M= date.getMinutes()
+  const M = date.getMinutes()
   const S = date.getSeconds()
   return format
     .replace("yy", y)
@@ -57,7 +57,7 @@ export const time = (val = new Date(), format = "yy-mm-dd h:m:s") => {
 export const Debounce = (fn, t) => {
   const delay = t || 500
   let timer
-  return function() {
+  return function () {
     const args = arguments
     if (timer) {
       clearTimeout(timer)
@@ -79,7 +79,7 @@ export const Throttle = (fn, t) => {
   let last
   let timer
   const interval = t || 500
-  return function() {
+  return function () {
     const args = arguments
     const now = +new Date()
     if (last && now - last < interval) {
@@ -91,6 +91,36 @@ export const Throttle = (fn, t) => {
     } else {
       last = now
       fn.apply(this, args)
+    }
+  }
+}
+/**
+ * 递归查找指定元素
+ * @param {*} code 指定元素
+ * @param {*} arr 查询区间
+ */
+export const filterTableMater = (code, arr) => {
+  for (const item of arr) {
+    if (item.url === code) return item
+    if (item.children && item.children.length > 0) {
+      const _item = filterTableMater(code, item.children)
+      if (_item) return _item
+    }
+  }
+}
+
+/**
+ * 递归查找children第一项
+ * @param {*} arr 查询区间
+ */
+export const filterChildrenFirst = (arr) => {
+  for (const item of arr) {
+    if (!item.children) {
+      return item
+    }
+    if (item.children && item.children.length > 0) {
+      const _item = filterChildrenFirst(item.children)
+      if (_item) return _item
     }
   }
 }
