@@ -1,108 +1,16 @@
-# vue3.0 和 element-plus 开发模块化模板
+# Vue 3 + TypeScript + Vite
 
-# 封装table、菜单、自定义换肤、路由守卫一系列功能
+This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-```
-tpl-hr-vue
-├─ .eslintrc.js
-├─ .gitignore
-├─ babel.config.js
-├─ package-lock.json
-├─ package.json
-├─ public
-│  ├─ favicon.ico
-│  ├─ index.html
-│  └─ iocnFont
-├─ README.md
-├─ src
-│  ├─ app.js
-│  ├─ App.vue
-│  ├─ assets
-│  │  ├─ css
-│  │  ├─ imgs
-│  │  └─ svg
-│  ├─ components
-│  │  ├─ deteTime
-│  │  ├─ echartCommon
-│  │  ├─ eTable
-│  │  ├─ index.js
-│  │  ├─ Layout
-│  │  ├─ Loading
-│  │  ├─ NotData
-│  │  ├─ NotFound
-│  │  ├─ numberScroll
-│  │  ├─ SideMenu
-│  │  ├─ svgIcons
-│  │  └─ themePicker
-│  ├─ directives
-│  │  ├─ auto-scale
-│  │  ├─ drag
-│  │  ├─ index.js
-│  │  └─ water-marker
-│  ├─ http
-│  │  ├─ axios.js
-│  │  └─ index.js
-│  ├─ icons
-│  ├─ main.js
-│  ├─ mock
-│  ├─ permission.js
-│  ├─ router
-│  ├─ store
-│  │  ├─ common
-│  │  │  ├─ index.js
-│  │  │  └─ modules
-│  │  │     └─ user.js
-│  │  └─ index.js
-│  ├─ utils
-│  │  ├─ bus.js
-│  │  ├─ doAnimation.js
-│  │  └─ index.js
-│  └─ views
-│     ├─ home
-│     │  ├─ children
-│     │  │  └─ home
-│     │  │     ├─ api.js
-│     │  │     ├─ index.vue
-│     │  │     ├─ router.js
-│     │  │     └─ store.js
-│     │  ├─ index.js
-│     │  ├─ router.js
-│     │  └─ store.js
-│     ├─ index.js
-│     ├─ login
-│     │  └─ index.vue
-│     ├─ module1
-│     │  ├─ children
-│     │  │  ├─ menu1
-│     │  │  │  ├─ router.js
-│     │  │  │  ├─ store.js
-│     │  │  │  └─ views
-│     │  │  │     └─ menu1-1
-│     │  │  │        ├─ api.js
-│     │  │  │        ├─ columns.js
-│     │  │  │        └─ index.vue
-│     │  │  └─ menu2
-│     │  │     ├─ router.js
-│     │  │     ├─ store.js
-│     │  │     └─ views
-│     │  │        └─ menu1-1
-│     │  │           ├─ api.js
-│     │  │           └─ index.vue
-│     │  ├─ index.js
-│     │  ├─ router.js
-│     │  └─ store.js
-│     └─ module2
-│        ├─ children
-│        │  └─ menu1
-│        │     ├─ router.js
-│        │     ├─ store.js
-│        │     └─ views
-│        │        └─ menu1-1
-│        │           ├─ api.js
-│        │           └─ index.vue
-│        ├─ index.js
-│        ├─ router.js
-│        └─ store.js
-├─ vue.config.js
-└─ yarn.lock
-```
+## Recommended IDE Setup
+
+- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+## Type Support For `.vue` Imports in TS
+
+Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+
+1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
+2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+
+You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
