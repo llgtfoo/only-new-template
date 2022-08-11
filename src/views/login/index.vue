@@ -77,7 +77,8 @@
 
 <script>
 import logo from '@/assets/svg/logo.svg'
-export default {
+import {defineComponent} from 'vue'
+export default defineComponent({
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -140,7 +141,7 @@ export default {
       })
     },
   },
-}
+})
 </script>
 
 <style lang='scss' scoped>
