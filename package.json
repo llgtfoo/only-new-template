@@ -1,8 +1,10 @@
 {
-  "name": "name",
-  "private": true,
-  "version": "0.0.1",
+  "name": "{{name}}",
   "type": "module",
+  "version": "0.1.0",
+  "private": false,
+  "description": "{{description}}",
+  "author": "{{author}}",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

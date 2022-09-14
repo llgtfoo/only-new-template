@@ -15,13 +15,13 @@
                 "cname": "子菜单一",
                 "cnameKey": "/module1/menu1",
                 "normalUrl": "/module1/menu1",
-                "icon": "icon-Moneymanagement-fill",
+                "icon": "icon-data",
                 "children": [
                     {
                         "cname": "页面一",
                         "cnameKey": "/module1/menu1/index1",
                         "normalUrl": "/module1/menu1/index1",
-                        "icon": "icon-Moneymanagement-fill"
+                        "icon": "icon-integral-fill1"
                     }
                 ]
             },
@@ -29,13 +29,13 @@
                 "cname": "子菜单二",
                 "cnameKey": "/module1/menu2",
                 "normalUrl": "/module1/menu2",
-                "icon": "icon-office-supplies-fill",
+                "icon": "icon-column",
                 "children": [
                     {
                         "cname": "页面二",
                         "cnameKey": "/module1/menu2/index1",
                         "normalUrl": "/module1/menu2/index1",
-                        "icon": "icon-Moneymanagement-fill"
+                        "icon": "icon-product1"
                     }
                 ]
             }
@@ -51,13 +51,13 @@
                 "cname": "子菜单一",
                 "cnameKey": "/module2/menu1",
                 "normalUrl": "/module2/menu1",
-                "icon": "icon-Moneymanagement-fill",
+                "icon": "icon-integral-fill1",
                 "children": [
                     {
                         "cname": "页面1",
                         "cnameKey": "/module2/menu1/index1",
                         "normalUrl": "/module2/menu1/index1",
-                        "icon": "icon-Moneymanagement-fill"
+                        "icon": "icon-agriculture"
                     }
                 ]
             }
