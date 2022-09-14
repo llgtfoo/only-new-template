@@ -1,12 +1,12 @@
 {
-  "name": "{{name}}",
+  "name": "name",
   "type": "module",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "description": "{{description}}",
   "author": "{{author}}",
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -16,6 +16,7 @@
     "echarts": "^5.0.2",
     "element-plus": "^2.2.12",
     "es-module-lexer": "^0.4.1",
+    "nprogress": "^0.2.0",
     "postcss": "^8.2.10",
     "qs": "^6.10.1",
     "sass": "^1.32.8",

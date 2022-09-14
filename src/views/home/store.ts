@@ -10,7 +10,7 @@ const importAll = (context) => {
   }
   return map
 }
-const req = import.meta.globEager('./children/*/store.js')
+const req = import.meta.globEager('./children/*/store.ts')
 const modules = importAll(req)
 export default () => {
   return {

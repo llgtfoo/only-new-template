@@ -1,5 +1,5 @@
 
-const req = import.meta.globEager('./children/*/router.js')
+const req = import.meta.globEager('./children/*/router.ts')
 const children = []
 Object.keys(req).forEach(mu=>{
     if (req[mu].default) {
